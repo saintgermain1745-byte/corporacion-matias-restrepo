@@ -1,0 +1,45 @@
+---
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Corporación Matías Restrepo - Transformando vidas" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title} | Corporación Matías Restrepo</title>
+  </head>
+  <body>
+    <header style="padding: 1rem; border-bottom: 1px solid #eee;">
+      <strong>Corporación Matías Restrepo</strong>
+    </header>
+
+    <main style="min-height: 80vh; padding: 2rem; max-width: 800px; margin: 0 auto;">
+      <slot />
+    </main>
+
+    <footer style="text-align: center; padding: 2rem; font-size: 0.9rem; color: #666;">
+      <p>&copy; {new Date().getFullYear()} Corporación Matías Restrepo. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Widget flotante de Ko-fi -->
+    <!-- Widget flotante de Ko-fi -->
+    <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js' is:inline></script>
+    <script is:inline>
+      kofiWidgetOverlay.draw('corporacionmatiasrestrepo', {
+        'type': 'floating-chat',
+        'floating-chat.donateButton.text': 'Invítanos un café',
+        'floating-chat.donateButton.background-color': '#4a6fa5',
+        'floating-chat.donateButton.text-color': '#fff',
+        'floating-chat.donateButton.position': 'right',
+        'floating-chat.donateButton.margin': '20px'
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Donar">
+  <h1>Apoya nuestra labor</h1>
+  <p>Tu contribución hace posible que sigamos transformando vidas en nuestra comunidad.</p>
+
+  <div style="display: grid; gap: 2rem; margin-top: 3rem;">
+    
+        <!-- Opción 1: Café Virtual (Ko-fi) -->
+    <section style="border: 1px solid #ddd; padding: 2rem; border-radius: 8px; text-align: center;">
+      <h2>☕ Invítanos un café</h2>
+      <p>Un gesto rápido y simbólico que nos ayuda a mantener nuestros proyectos en marcha.</p>
+      
+      <a href="https://ko-fi.com/corporacionmatiasrestrepo" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin-top: 1.5rem; background: #ff5f5f; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 1.1rem;">
+        ❤️ Apoyar en Ko-fi
+      </a>
+    </section>
+
+    <!-- Opción 2: Donación Formal (Pasarela) -->
+    <section style="border: 1px solid #ddd; padding: 2rem; border-radius: 8px; background-color: #f9f9f9;">
+      <h2>💳 Donación formal</h2>
+      <p>Si deseas realizar una donación de mayor cuantía o necesitas un certificado de donación, utiliza nuestra pasarela segura.</p>
+      
+      <div style="margin-top: 1.5rem;">
+        <button disabled style="background: #ccc; color: #666; padding: 1rem 2rem; border: none; border-radius: 5px; cursor: not-allowed;">
+          Próximamente (Pasarela de pago)
+        </button>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

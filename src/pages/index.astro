@@ -1,16 +1,15 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Inicio">
+  <section style="text-align: center; margin-top: 3rem;">
+    <h1>Bienvenidos a la Corporación Matías Restrepo</h1>
+    <p style="font-size: 1.2rem; color: #444; margin-bottom: 2rem;">
+      Trabajamos cada día para transformar vidas y construir un futuro mejor.
+    </p>
+    <a href="/donar" style="background: #4a6fa5; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; font-weight: bold;">
+      Apoya nuestra causa
+    </a>
+  </section>
+</BaseLayout>
