@@ -35,7 +35,7 @@ const currentPath = Astro.url.pathname;
         --fuente-cuerpo: 'Inter', sans-serif;
       }
 
-      body {
+            body {
         margin: 0;
         padding: 0;
         font-family: var(--fuente-cuerpo);
@@ -43,6 +43,7 @@ const currentPath = Astro.url.pathname;
         background-color: var(--color-fondo);
         line-height: 1.6;
         -webkit-font-smoothing: antialiased;
+        overflow-x: hidden; /* ESTA ES LA LÍNEA NUEVA */
       }
 
       h1, h2, h3 { font-family: var(--fuente-titulos); font-weight: 600; color: #1a1a1a; }
@@ -87,14 +88,15 @@ const currentPath = Astro.url.pathname;
       </div>
     </footer>
 
-    <!-- Ko-fi -->
+     <!-- Ko-fi -->
     <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js' is:inline></script>
     <script is:inline>
       kofiWidgetOverlay.draw('corporacionmatiasrestrepo', {
         'type': 'floating-chat',
-        'floating-chat.donateButton.text': 'Invítanos un café',
+        'floating-chat.donateButton.text': 'Apóyanos', /* Texto más corto */
         'floating-chat.donateButton.background-color': '#c1121f',
-        'floating-chat.donateButton.text-color': '#fff'
+        'floating-chat.donateButton.text-color': '#fff',
+        'floating-chat.donateButton.position': 'right' /* Mover a la derecha */
       });
     </script>
 
