@@ -10,35 +10,91 @@ const { title } = Astro.props;
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Corporación Matías Restrepo - Transformando vidas" />
+    <meta name="description" content="Corporación Matías Restrepo - Excelencia con sentido humano. Apoyamos a personas con discapacidad y cáncer en Guarne, Antioquia." />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    
+    <!-- Fuentes de Google para un look elegante -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    
     <title>{title} | Corporación Matías Restrepo</title>
+    
+    <style is:global>
+      /* Variables de diseño para mantener la elegancia */
+      :root {
+        --color-primario: #c1121f; /* Rojo del logo */
+        --color-secundario: #2a9d8f; /* Verde del logo */
+        --color-texto: #2b2b2b;
+        --color-fondo: #ffffff;
+        --color-fondo-suave: #f8f9fa;
+        --fuente-titulos: 'Playfair Display', serif;
+        --fuente-cuerpo: 'Inter', sans-serif;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: var(--fuente-cuerpo);
+        color: var(--color-texto);
+        background-color: var(--color-fondo);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      h1, h2, h3 {
+        font-family: var(--fuente-titulos);
+        font-weight: 600;
+        color: #1a1a1a;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+    </style>
   </head>
   <body>
-    <header style="padding: 1rem; border-bottom: 1px solid #eee;">
-      <strong>Corporación Matías Restrepo</strong>
+    <!-- Header Elegante -->
+    <header style="padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eaeaea; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+         <!-- Texto del logo en lugar de la imagen para que se vea limpio en el menú -->
+        <span style="font-family: var(--fuente-titulos); font-size: 1.4rem; font-weight: 600; color: #1a1a1a;">
+          Corporación <span style="color: var(--color-primario);">Matías Restrepo</span>
+        </span>
+      </div>
+      <nav style="display: none; gap: 2rem; font-weight: 400;">
+         <!-- Aquí irá el menú pronto -->
+      </nav>
     </header>
 
-    <main style="min-height: 80vh; padding: 2rem; max-width: 800px; margin: 0 auto;">
+    <main>
       <slot />
     </main>
 
-    <footer style="text-align: center; padding: 2rem; font-size: 0.9rem; color: #666;">
-      <p>&copy; {new Date().getFullYear()} Corporación Matías Restrepo. Todos los derechos reservados.</p>
+    <!-- Footer Elegante -->
+    <footer style="background-color: #1a1a1a; color: #ffffff; padding: 4rem 5% 2rem; margin-top: 5rem;">
+      <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1rem;">
+        <img src="/logo.png" alt="Logo Corporación Matías Restrepo" style="width: 150px; border-radius: 50%; background: white; padding: 10px;" />
+        <h3 style="color: white; margin: 0; font-family: var(--fuente-titulos);">Excelencia con sentido humano</h3>
+        <p style="color: #a0a0a0; font-size: 0.9rem; max-width: 400px;">
+          Trabajando por la comunidad del Oriente Antioqueño, Guarne y sus alrededores.
+        </p>
+        <div style="margin-top: 2rem; border-top: 1px solid #333; padding-top: 2rem; width: 100%; font-size: 0.8rem; color: #666;">
+          <p>&copy; {new Date().getFullYear()} Corporación Matías Restrepo. Todos los derechos reservados.</p>
+        </div>
+      </div>
     </footer>
 
-    <!-- Widget flotante de Ko-fi -->
     <!-- Widget flotante de Ko-fi -->
     <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js' is:inline></script>
     <script is:inline>
       kofiWidgetOverlay.draw('corporacionmatiasrestrepo', {
         'type': 'floating-chat',
         'floating-chat.donateButton.text': 'Invítanos un café',
-        'floating-chat.donateButton.background-color': '#4a6fa5',
-        'floating-chat.donateButton.text-color': '#fff',
-        'floating-chat.donateButton.position': 'right',
-        'floating-chat.donateButton.margin': '20px'
+        'floating-chat.donateButton.background-color': '#c1121f', /* Rojo del logo */
+        'floating-chat.donateButton.text-color': '#fff'
       });
     </script>
   </body>
