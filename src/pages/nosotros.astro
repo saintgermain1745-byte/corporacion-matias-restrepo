@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Nosotros">
+  <section style="padding: 4rem 5%; max-width: 1000px; margin: 0 auto;">
+    
+    <!-- Encabezado -->
+    <div style="text-align: center; margin-bottom: 4rem;" data-aos="fade-up">
+      <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">Nuestra Historia</h1>
+      <p style="color: var(--color-secundario); font-size: 1.2rem; font-weight: 600;">"Excelencia con sentido humano"</p>
+    </div>
+
+    <!-- Historia y Misión -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 5rem;" data-aos="fade-up">
+      <div>
+        <h2 style="font-size: 2rem; margin-bottom: 1rem;">¿Quiénes somos?</h2>
+        <p style="color: #555; font-size: 1.1rem; margin-bottom: 1rem;">
+          La Corporación Matías Restrepo nació con el firme propósito de transformar la realidad de las personas en el Oriente Antioqueño. Llevamos un año trabajando incansablemente en el municipio de Guarne.
+        </p>
+        <p style="color: #555; font-size: 1.1rem;">
+          Nacimos para apoyar a personas en situación de discapacidad, en sillas de ruedas, y a pacientes con cáncer u otras enfermedades crónicas. Nuestro compromiso es brindar acompañamiento, insumos y esperanza a sus familias.
+        </p>
+      </div>
+      <!-- Reemplaza esta imagen con una foto real de la fundación cuando la tengas -->
+      <div style="border-radius: 15px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1);">
+        <img src="https://images.unsplash.com/photo-1593113589919-0d7b9074b1c0?q=80&w=800&auto=format&fit=crop" alt="Comunidad" style="width: 100%; height: auto; display: block;" />
+      </div>
+    </div>
+
+    <!-- Pilares / Estatutos -->
+    <div style="background: #f8f9fa; padding: 3rem; border-radius: 15px; margin-bottom: 5rem;" data-aos="fade-up">
+      <h2 style="text-align: center; font-size: 2rem; margin-bottom: 2rem;">Nuestros Ejes de Acción</h2>
+      <ul style="list-style: none; padding: 0; display: grid; gap: 1.5rem;">
+        <li style="display: flex; gap: 1rem; align-items: flex-start;">
+          <span style="color: var(--color-primario); font-size: 1.5rem;">❤️</span>
+          <div>
+            <strong style="display: block; font-size: 1.2rem; margin-bottom: 0.5rem;">Discapacidad y Movilidad</strong>
+            <span style="color: #666;">Apoyo integral a personas en sillas de ruedas y con enfermedades que limitan su movilidad.</span>
+          </div>
+        </li>
+        <li style="display: flex; gap: 1rem; align-items: flex-start;">
+          <span style="color: var(--color-secundario); font-size: 1.5rem;">🎗️</span>
+          <div>
+            <strong style="display: block; font-size: 1.2rem; margin-bottom: 0.5rem;">Apoyo Oncológico</strong>
+            <span style="color: #666;">Acompañamiento a pacientes con cáncer y sus familias, gestionando ayudas y apoyo emocional.</span>
+          </div>
+        </li>
+        <li style="display: flex; gap: 1rem; align-items: flex-start;">
+          <span style="color: #e9c46a; font-size: 1.5rem;">🤝</span>
+          <div>
+            <strong style="display: block; font-size: 1.2rem; margin-bottom: 0.5rem;">Comunidad y Bienestar</strong>
+            <span style="color: #666;">Construcción de redes de apoyo en Guarne y el Oriente Antioqueño, promoviendo la inclusión.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </section>
+</BaseLayout>
