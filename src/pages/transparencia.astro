@@ -27,15 +27,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Botones de Descarga y Objeto Social -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
       
-      <!-- Certificado -->
+            <!-- Certificado -->
       <div style="background: white; border: 1px solid #eaeaea; padding: 2rem; border-radius: 15px; text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
           <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">📄</span>
           <h3 style="margin-top: 0;">Certificado de Existencia</h3>
-          <p style="color: #666; font-size: 0.95rem; margin-bottom: 1.5rem;">Documento oficial expedido por la Cámara de Comercio del Oriente Antioqueño.</p>
+          <p style="color: #666; font-size: 0.95rem; margin-bottom: 1.5rem;">Documento oficial expedido por la Cámara de Comercio del Oriente Antioqueño. Por seguridad de nuestros datos, se envía bajo solicitud.</p>
         </div>
-        <a href="/documentos/certificado-existencia.pdf" target="_blank" rel="noopener noreferrer" style="background: var(--color-primario); color: white; padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-block; transition: background 0.3s;">
-          Descargar Certificado (PDF)
+        <!-- Enlace al formulario de contacto para solicitarlo -->
+        <a href="/contacto" style="background: var(--color-primario); color: white; padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-block; transition: background 0.3s;">
+          Solicitar Certificado
         </a>
       </div>
       
