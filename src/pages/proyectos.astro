@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Proyectos">
+  
+  <!-- Encabezado -->
+  <section style="padding: 5rem 5% 3rem; text-align: center; background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);" data-aos="fade-up">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">Nuestros Proyectos</h1>
+      <p style="font-size: 1.2rem; color: #555;">
+        Trabajamos de forma integral para transformar la realidad de las familias en Guarne y el Oriente Antioqueño. Conoce cómo tu apoyo se convierte en acción.
+      </p>
+    </div>
+  </section>
+
+  <!-- Proyecto 1: Discapacidad -->
+  <section style="padding: 4rem 5%; max-width: 1100px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; align-items: center;" data-aos="fade-up">
+      <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1);">
+        <img src="/3.jpg" alt="Apoyo a la discapacidad" style="width: 100%; height: auto; display: block;" />
+      </div>
+      <div>
+        <span style="background: #ffe5e5; color: var(--color-primario); padding: 0.5rem 1rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem;">Pilar 1</span>
+        <h2 style="font-size: 2.5rem; margin-top: 1rem; margin-bottom: 1rem;">Movilidad y Discapacidad</h2>
+        <p style="color: #555; font-size: 1.1rem; margin-bottom: 1.5rem;">
+          Brindamos acompañamiento y apoyo a personas en situación de discapacidad y con movilidad reducida en el municipio de Guarne. 
+        </p>
+        <ul style="color: #555; font-size: 1.1rem; padding-left: 1.2rem; margin-bottom: 1.5rem;">
+          <li>Gestión y mantenimiento de sillas de ruedas.</li>
+          <li>Acompañamiento a citas médicas y terapias.</li>
+          <li>Entrega de insumos y elementos de apoyo.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proyecto 2: Cáncer (Invertido) -->
+  <section style="padding: 4rem 5%; background: #f8f9fa;">
+    <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; align-items: center;" data-aos="fade-up">
+      <div style="order: 2;">
+        <span style="background: #e0f2f1; color: var(--color-secundario); padding: 0.5rem 1rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem;">Pilar 2</span>
+        <h2 style="font-size: 2.5rem; margin-top: 1rem; margin-bottom: 1rem;">Apoyo Oncológico</h2>
+        <p style="color: #555; font-size: 1.1rem; margin-bottom: 1.5rem;">
+          El diagnóstico de cáncer afecta a toda la familia. Por eso, acompañamos a los pacientes y a sus cuidadores durante todo el proceso.
+        </p>
+        <ul style="color: #555; font-size: 1.1rem; padding-left: 1.2rem;">
+          <li>Apoyo para el transporte a centros de salud.</li>
+          <li>Ayuda con insumos médicos básicos.</li>
+          <li>Contención emocional y redes de apoyo.</li>
+        </ul>
+      </div>
+      <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1); order: 1;">
+        <img src="/9.jpg" alt="Apoyo a pacientes con cáncer" style="width: 100%; height: auto; display: block;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Proyecto 3: Mercados -->
+  <section style="padding: 4rem 5%; max-width: 1100px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; align-items: center;" data-aos="fade-up">
+      <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1);">
+        <img src="/10.jpg" alt="Entrega de mercados" style="width: 100%; height: auto; display: block;" />
+      </div>
+      <div>
+        <span style="background: #fff3cd; color: #d39e00; padding: 0.5rem 1rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem;">Pilar 3</span>
+        <h2 style="font-size: 2.5rem; margin-top: 1rem; margin-bottom: 1rem;">Seguridad Alimentaria</h2>
+        <p style="color: #555; font-size: 1.1rem; margin-bottom: 1.5rem;">
+          Para sanar, primero hay que cubrir las necesidades básicas. Entregamos mercados y víveres a las familias de bajos recursos que más lo necesitan.
+        </p>
+        <ul style="color: #555; font-size: 1.1rem; padding-left: 1.2rem;">
+          <li>Entrega periódica de mercados familiares.</li>
+          <li>Identificación de hogares en inseguridad alimentaria.</li>
+          <li>Apoyo nutricional para niños y adultos mayores.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proyecto 4: Comunidad -->
+  <section style="padding: 4rem 5% 6rem; background: #f8f9fa;">
+    <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; align-items: center;" data-aos="fade-up">
+      <div style="order: 2;">
+        <span style="background: #e3f2fd; color: #1976d2; padding: 0.5rem 1rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem;">Pilar 4</span>
+        <h2 style="font-size: 2.5rem; margin-top: 1rem; margin-bottom: 1rem;">Tejido Social</h2>
+        <p style="color: #555; font-size: 1.1rem; margin-bottom: 1.5rem;">
+          Construimos comunidad. Trabajamos para que Guarne y el Oriente Antioqueño sean territorios más inclusivos y solidarios.
+        </p>
+        <ul style="color: #555; font-size: 1.1rem; padding-left: 1.2rem;">
+          <li>Jornadas de integración comunitaria.</li>
+          <li>Espacios de escucha y apoyo mutuo.</li>
+          <li>Promoción de la inclusión social.</li>
+        </ul>
+      </div>
+      <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1); order: 1;">
+        <img src="/7.jpg" alt="Comunidad en Guarne" style="width: 100%; height: auto; display: block;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Llamado a la acción final -->
+  <section style="padding: 5rem 5%; text-align: center; background: #1a1a1a; color: white;">
+    <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: white;">¿Quieres ser parte del cambio?</h2>
+    <p style="color: #aaa; margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; font-size: 1.1rem;">
+      Tu apoyo, ya sea económico o como voluntario, es fundamental para que estos proyectos sigan llegando a quienes más lo necesitan.
+    </p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="/donar" style="background: var(--color-primario); color: white; padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; text-decoration: none; font-size: 1.1rem;">
+        Donar Ahora
+      </a>
+      <a href="/contacto" style="background: transparent; color: white; border: 1px solid #555; padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; text-decoration: none; font-size: 1.1rem;">
+        Ser Voluntario
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

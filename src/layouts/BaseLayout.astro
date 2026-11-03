@@ -64,8 +64,9 @@ const currentPath = Astro.url.pathname;
         </span>
       </a>
       
-      <nav style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-top: 10px;">
+            <nav style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-top: 10px;">
         <a href="/" class={`nav-link ${currentPath === '/' ? 'active' : ''}`}>Inicio</a>
+        <a href="/proyectos" class={`nav-link ${currentPath === '/proyectos' ? 'active' : ''}`}>Proyectos</a> <!-- NUEVA LÍNEA -->
         <a href="/nosotros" class={`nav-link ${currentPath === '/nosotros' ? 'active' : ''}`}>Nosotros</a>
         <a href="/galeria" class={`nav-link ${currentPath === '/galeria' ? 'active' : ''}`}>Galería</a>
         <a href="/contacto" class={`nav-link ${currentPath === '/contacto' ? 'active' : ''}`}>Contacto</a>
