@@ -3,32 +3,79 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Donar">
-  <h1>Apoya nuestra labor</h1>
-  <p>Tu contribución hace posible que sigamos transformando vidas en nuestra comunidad.</p>
+  
+  <!-- Encabezado -->
+  <section style="padding: 5rem 5% 3rem; text-align: center; background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);" data-aos="fade-up">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h1 style="font-size: 3rem; margin-bottom: 1rem;">Tu ayuda tiene un impacto real</h1>
+      <p style="font-size: 1.2rem; color: #555;">
+        Cada aporte, grande o pequeño, nos permite seguir acompañando a las familias de Guarne y el Oriente Antioqueño. Elige a continuación cómo quieres transformar una vida hoy.
+      </p>
+    </div>
+  </section>
 
-  <div style="display: grid; gap: 2rem; margin-top: 3rem;">
-    
-        <!-- Opción 1: Café Virtual (Ko-fi) -->
-    <section style="border: 1px solid #ddd; padding: 2rem; border-radius: 8px; text-align: center;">
-      <h2>☕ Invítanos un café</h2>
-      <p>Un gesto rápido y simbólico que nos ayuda a mantener nuestros proyectos en marcha.</p>
+  <!-- Tarjetas de Impacto (Neuromarketing) -->
+  <section style="padding: 2rem 5% 5rem; max-width: 1200px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
       
-      <a href="https://ko-fi.com/corporacionmatiasrestrepo" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin-top: 1.5rem; background: #ff5f5f; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 1.1rem;">
-        ❤️ Apoyar en Ko-fi
-      </a>
-    </section>
-
-    <!-- Opción 2: Donación Formal (Pasarela) -->
-    <section style="border: 1px solid #ddd; padding: 2rem; border-radius: 8px; background-color: #f9f9f9;">
-      <h2>💳 Donación formal</h2>
-      <p>Si deseas realizar una donación de mayor cuantía o necesitas un certificado de donación, utiliza nuestra pasarela segura.</p>
-      
-      <div style="margin-top: 1.5rem;">
-        <button disabled style="background: #ccc; color: #666; padding: 1rem 2rem; border: none; border-radius: 5px; cursor: not-allowed;">
-          Próximamente (Pasarela de pago)
-        </button>
+      <!-- Opción 1: Mercados -->
+      <div data-aos="fade-up" style="background: white; border-radius: 15px; padding: 2.5rem 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #eaeaea; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">🛒</span>
+          <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #1a1a1a;">Mercado Familiar</h3>
+          <p style="color: #666; margin-bottom: 1.5rem; font-size: 0.95rem;">Asegura la alimentación de una familia de bajos recursos en Guarne por varias semanas.</p>
+        </div>
+        <a href="https://ko-fi.com/corporacionmatiasrestrepo/?amount=10" target="_blank" rel="noopener noreferrer" style="background: var(--color-primario); color: white; padding: 1rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: background 0.3s; display: block;">
+          Donar $10 USD <span style="font-size: 0.8rem; font-weight: 400; display: block; opacity: 0.9;">(~$40.000 COP)</span>
+        </a>
       </div>
-    </section>
 
-  </div>
+      <!-- Opción 2: Apoyo Oncológico -->
+      <div data-aos="fade-up" data-aos-delay="100" style="background: white; border-radius: 15px; padding: 2.5rem 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #eaeaea; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">🎗️</span>
+          <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #1a1a1a;">Apoyo al Paciente</h3>
+          <p style="color: #666; margin-bottom: 1.5rem; font-size: 0.95rem;">Insumos médicos y transporte para un paciente con cáncer que necesita asistir a sus terapias.</p>
+        </div>
+        <a href="https://ko-fi.com/corporacionmatiasrestrepo/?amount=25" target="_blank" rel="noopener noreferrer" style="background: var(--color-secundario); color: white; padding: 1rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: background 0.3s; display: block;">
+          Donar $25 USD <span style="font-size: 0.8rem; font-weight: 400; display: block; opacity: 0.9;">(~$100.000 COP)</span>
+        </a>
+      </div>
+
+      <!-- Opción 3: Movilidad -->
+      <div data-aos="fade-up" data-aos-delay="200" style="background: white; border-radius: 15px; padding: 2.5rem 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #eaeaea; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">♿</span>
+          <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #1a1a1a;">Apoyo a la Movilidad</h3>
+          <p style="color: #666; margin-bottom: 1.5rem; font-size: 0.95rem;">Ayuda para el mantenimiento de sillas de ruedas y elementos de movilidad para la comunidad.</p>
+        </div>
+        <a href="https://ko-fi.com/corporacionmatiasrestrepo/?amount=50" target="_blank" rel="noopener noreferrer" style="background: #e9c46a; color: #1a1a1a; padding: 1rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: background 0.3s; display: block;">
+          Donar $50 USD <span style="font-size: 0.8rem; font-weight: 400; display: block; opacity: 0.9;">(~$200.000 COP)</span>
+        </a>
+      </div>
+
+    </div>
+    
+    <!-- Microdonación (Café Virtual) -->
+    <div style="text-align: center; margin-top: 3rem;" data-aos="fade-up" data-aos-delay="300">
+      <p style="color: #666; margin-bottom: 1rem;">¿Prefieres un aporte más pequeño? Cada café cuenta.</p>
+      <a href="https://ko-fi.com/corporacionmatiasrestrepo" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: #f8f9fa; border: 1px solid #ccc; color: #333; padding: 0.8rem 1.5rem; border-radius: 50px; font-weight: 600; text-decoration: none;">
+        ☕ Invítanos un café (Monto libre)
+      </a>
+    </div>
+  </section>
+
+  <!-- Donación Formal (Pasarela) -->
+  <section style="padding: 4rem 5%; background: #f8f9fa; text-align: center; border-top: 1px solid #eaeaea;" data-aos="fade-up">
+    <div style="max-width: 600px; margin: 0 auto;">
+      <h2 style="font-size: 2rem; margin-bottom: 1rem;">Donaciones formales y empresas</h2>
+      <p style="color: #666; margin-bottom: 2rem;">
+        Si representas a una empresa, deseas realizar una donación de mayor cuantía o necesitas un certificado de donación para efectos tributarios, por favor contáctanos.
+      </p>
+      <a href="/contacto" style="background: #1a1a1a; color: white; padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; text-decoration: none; display: inline-block;">
+        Contactar para donación formal
+      </a>
+    </div>
+  </section>
+
 </BaseLayout>
