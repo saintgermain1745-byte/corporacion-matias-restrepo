@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Aquí puedes agregar, quitar o editar las noticias fácilmente.
+// Solo copia un bloque { ... } y pégalo abajo para crear una nueva noticia.
+const noticias = [
+  {
+    titulo: "Avances en la detección temprana del cáncer",
+    fecha: "Noviembre 2026",
+    resumen: "Nuevos estudios científicos demuestran que las pruebas de sangre líquida pueden detectar hasta 8 tipos de cáncer en etapas tempranas, mejorando drásticamente las tasas de supervivencia.",
+    imagen: "https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=600&auto=format&fit=crop",
+    enlace: "#"
+  },
+  {
+    titulo: "Tecnología de exoesqueletos para la movilidad",
+    fecha: "Octubre 2026",
+    resumen: "La nueva generación de exoesqueletos ligeros está permitiendo a personas con lesiones medulares volver a caminar. Estos dispositivos utilizan IA para interpretar las intenciones de movimiento del usuario.",
+    imagen: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=600&auto=format&fit=crop",
+    enlace: "#"
+  },
+  {
+    titulo: "El impacto del apoyo emocional en pacientes oncológicos",
+    fecha: "Septiembre 2026",
+    resumen: "Un estudio reciente confirma que los pacientes con cáncer que reciben apoyo psicosocial constante tienen un 30% más de probabilidades de responder positivamente a los tratamientos.",
+    imagen: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=600&auto=format&fit=crop",
+    enlace: "#"
+  }
+];
+---
+
+<BaseLayout title="Noticias de Salud">
+  <section style="padding: 5rem 5% 3rem; text-align: center; background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);" data-aos="fade-up">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">Noticias y Avances</h1>
+      <p style="font-size: 1.2rem; color: #555;">
+        Mantente al día con los últimos avances médicos, tecnológicos y sociales relacionados con la discapacidad y el cáncer.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding: 3rem 5% 5rem; max-width: 1200px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem;">
+      
+      {noticias.map((noticia) => (
+        <article data-aos="fade-up" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); display: flex; flex-direction: column;">
+          <div style="height: 200px; overflow: hidden;">
+            <img src={noticia.imagen} alt={noticia.titulo} style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;" class="news-img" />
+          </div>
+          <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column;">
+            <span style="color: var(--color-secundario); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">{noticia.fecha}</span>
+            <h3 style="font-size: 1.3rem; margin: 0.5rem 0 1rem; color: #1a1a1a;">{noticia.titulo}</h3>
+            <p style="color: #666; font-size: 0.95rem; flex-grow: 1; margin-bottom: 1.5rem;">{noticia.resumen}</p>
+            <a href={noticia.enlace} style="color: var(--color-primario); font-weight: 600; text-decoration: none; display: inline-block;">
+              Leer más &rarr;
+            </a>
+          </div>
+        </article>
+      ))}
+
+    </div>
+  </section>
+</BaseLayout>
