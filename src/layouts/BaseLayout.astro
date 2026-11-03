@@ -132,13 +132,13 @@ const currentPath = Astro.url.pathname;
       </div>
     </footer>
 
-        <!-- Botón de Accesibilidad -->
-    <button id="accessibility-btn" aria-label="Opciones de accesibilidad" style="position: fixed; bottom: 20px; left: 20px; z-index: 9998; background: #1a1a1a; color: white; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center; transition: transform 0.2s;">
+          <!-- Botón de Accesibilidad -->
+    <button id="accessibility-btn" aria-label="Opciones de accesibilidad" style="position: fixed; bottom: 20px; right: 20px; z-index: 99999; background: #1a1a1a; color: white; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center; transition: transform 0.2s;">
       ♿
     </button>
 
     <!-- Panel de Accesibilidad -->
-    <div id="accessibility-panel" style="display: none; position: fixed; bottom: 80px; left: 20px; z-index: 9999; background: white; border: 1px solid #eaeaea; border-radius: 15px; padding: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.15); width: 250px;">
+    <div id="accessibility-panel" style="display: none; position: fixed; bottom: 80px; right: 20px; z-index: 99999; background: white; border: 1px solid #eaeaea; border-radius: 15px; padding: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.15); width: 250px;">
       <h3 style="margin-top: 0; font-size: 1.1rem; margin-bottom: 1rem; color: #1a1a1a;">Opciones de Accesibilidad</h3>
       
       <div style="display: flex; flex-direction: column; gap: 0.8rem;">
@@ -179,7 +179,6 @@ const currentPath = Astro.url.pathname;
 
       function changeFontSize(direction) {
         currentFontSize += direction * 10;
-        // Límites: mínimo 80%, máximo 150%
         if (currentFontSize < 80) currentFontSize = 80;
         if (currentFontSize > 150) currentFontSize = 150;
         document.documentElement.style.fontSize = `${currentFontSize}%`;
