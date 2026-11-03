@@ -16,7 +16,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <!-- Tarjetas de Impacto (Neuromarketing) -->
   <section style="padding: 2rem 5% 5rem; max-width: 1200px; margin: 0 auto;">
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
       
       <!-- Opción 1: Mercados -->
       <div data-aos="fade-up" style="background: white; border-radius: 15px; padding: 2.5rem 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #eaeaea; display: flex; flex-direction: column; justify-content: space-between;">
@@ -25,8 +25,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #1a1a1a;">Mercado Familiar</h3>
           <p style="color: #666; margin-bottom: 1.5rem; font-size: 0.95rem;">Asegura la alimentación de una familia de bajos recursos en Guarne por varias semanas.</p>
         </div>
-        <a href="https://ko-fi.com/corporacionmatiasrestrepo/?amount=10" target="_blank" rel="noopener noreferrer" style="background: var(--color-primario); color: white; padding: 1rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: background 0.3s; display: block;">
-          Donar $10 USD <span style="font-size: 0.8rem; font-weight: 400; display: block; opacity: 0.9;">(~$40.000 COP)</span>
+        <a href="https://ko-fi.com/corporacionmatiasrestrepo/?amount=10" target="_blank" rel="noopener noreferrer" style="background: var(--color-primario); color: white; padding: 1rem; border-radius: 8px; font-weight: 600; text-decoration: none; display: block;">
+          Donar $10 USD <span class="cop-equivalent" data-usd="10" style="font-size: 0.8rem; font-weight: 400; display: block; opacity: 0.9;">(~$32.000 COP)</span>
         </a>
       </div>
 
@@ -37,8 +37,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #1a1a1a;">Apoyo al Paciente</h3>
           <p style="color: #666; margin-bottom: 1.5rem; font-size: 0.95rem;">Insumos médicos y transporte para un paciente con cáncer que necesita asistir a sus terapias.</p>
         </div>
-        <a href="https://ko-fi.com/corporacionmatiasrestrepo/?amount=25" target="_blank" rel="noopener noreferrer" style="background: var(--color-secundario); color: white; padding: 1rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: background 0.3s; display: block;">
-          Donar $25 USD <span style="font-size: 0.8rem; font-weight: 400; display: block; opacity: 0.9;">(~$100.000 COP)</span>
+        <a href="https://ko-fi.com/corporacionmatiasrestrepo/?amount=25" target="_blank" rel="noopener noreferrer" style="background: var(--color-secundario); color: white; padding: 1rem; border-radius: 8px; font-weight: 600; text-decoration: none; display: block;">
+          Donar $25 USD <span class="cop-equivalent" data-usd="25" style="font-size: 0.8rem; font-weight: 400; display: block; opacity: 0.9;">(~$80.000 COP)</span>
         </a>
       </div>
 
@@ -49,15 +49,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #1a1a1a;">Apoyo a la Movilidad</h3>
           <p style="color: #666; margin-bottom: 1.5rem; font-size: 0.95rem;">Ayuda para el mantenimiento de sillas de ruedas y elementos de movilidad para la comunidad.</p>
         </div>
-        <a href="https://ko-fi.com/corporacionmatiasrestrepo/?amount=50" target="_blank" rel="noopener noreferrer" style="background: #e9c46a; color: #1a1a1a; padding: 1rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: background 0.3s; display: block;">
-          Donar $50 USD <span style="font-size: 0.8rem; font-weight: 400; display: block; opacity: 0.9;">(~$200.000 COP)</span>
+        <a href="https://ko-fi.com/corporacionmatiasrestrepo/?amount=50" target="_blank" rel="noopener noreferrer" style="background: #e9c46a; color: #1a1a1a; padding: 1rem; border-radius: 8px; font-weight: 600; text-decoration: none; display: block;">
+          Donar $50 USD <span class="cop-equivalent" data-usd="50" style="font-size: 0.8rem; font-weight: 400; display: block; opacity: 0.9;">(~$160.000 COP)</span>
+        </a>
+      </div>
+
+      <!-- Opción 4: Nueva - Apoyo a la Comunidad -->
+      <div data-aos="fade-up" data-aos-delay="300" style="background: white; border-radius: 15px; padding: 2.5rem 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #eaeaea; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">🤝</span>
+          <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #1a1a1a;">Apoyo a la Comunidad</h3>
+          <p style="color: #666; margin-bottom: 1.5rem; font-size: 0.95rem;">Fortalece nuestros programas de integración y tejido social en Guarne y el Oriente Antioqueño.</p>
+        </div>
+        <a href="https://ko-fi.com/corporacionmatiasrestrepo/?amount=100" target="_blank" rel="noopener noreferrer" style="background: #4a6fa5; color: white; padding: 1rem; border-radius: 8px; font-weight: 600; text-decoration: none; display: block;">
+          Donar $100 USD <span class="cop-equivalent" data-usd="100" style="font-size: 0.8rem; font-weight: 400; display: block; opacity: 0.9;">(~$320.000 COP)</span>
         </a>
       </div>
 
     </div>
     
     <!-- Microdonación (Café Virtual) -->
-    <div style="text-align: center; margin-top: 3rem;" data-aos="fade-up" data-aos-delay="300">
+    <div style="text-align: center; margin-top: 3rem;" data-aos="fade-up" data-aos-delay="400">
       <p style="color: #666; margin-bottom: 1rem;">¿Prefieres un aporte más pequeño? Cada café cuenta.</p>
       <a href="https://ko-fi.com/corporacionmatiasrestrepo" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: #f8f9fa; border: 1px solid #ccc; color: #333; padding: 0.8rem 1.5rem; border-radius: 50px; font-weight: 600; text-decoration: none;">
         ☕ Invítanos un café (Monto libre)
@@ -77,5 +89,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </a>
     </div>
   </section>
+
+  <!-- Script para actualizar los precios en tiempo real -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        // Usamos una API gratuita que no requiere clave
+        const response = await fetch('https://cdn.jsdelivr.net/gh/irfanokr/currency-api@main/v1/currencies/usd.min.json');
+        const data = await response.json();
+        const trm = data.usd.cop; // Tasa de cambio USD a COP
+
+        if (trm) {
+          // Buscamos todos los elementos que muestran el equivalente en COP
+          const elements = document.querySelectorAll('.cop-equivalent');
+          elements.forEach(el => {
+            const usdAmount = parseFloat(el.getAttribute('data-usd'));
+            if (!isNaN(usdAmount)) {
+              const copAmount = Math.round(usdAmount * trm);
+              // Formateamos el número con separador de miles
+              el.textContent = `(~$${copAmount.toLocaleString('es-CO')} COP)`;
+            }
+          });
+        }
+      } catch (error) {
+        console.warn('No se pudo obtener la TRM actual. Se usarán los valores de respaldo.', error);
+      }
+    });
+  </script>
 
 </BaseLayout>
