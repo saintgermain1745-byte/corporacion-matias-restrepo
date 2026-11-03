@@ -61,6 +61,7 @@ const currentPath = Astro.url.pathname;
       .nav-link.active { font-weight: 600; color: var(--color-primario); border-bottom: 2px solid var(--color-primario); border-radius: 0; }
     </style>
   </head>
+  
   <body>
         <header style="padding: 1rem 5%; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; border-bottom: 1px solid #eaeaea; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;">
       <a href="/" style="display: flex; align-items: center; gap: 10px;">
@@ -77,6 +78,7 @@ const currentPath = Astro.url.pathname;
         <a href="/nosotros" class={`nav-link ${currentPath === '/nosotros' ? 'active' : ''}`}>Nosotros</a>
         <a href="/galeria" class={`nav-link ${currentPath === '/galeria' ? 'active' : ''}`}>Galería</a>
         <a href="/contacto" class={`nav-link ${currentPath === '/contacto' ? 'active' : ''}`}>Contacto</a>
+        <a href="/voluntariado" class={`nav-link ${currentPath === '/voluntariado' ? 'active' : ''}`}>Voluntariado</a> <!-- NUEVA LÍNEA -->
         <a href="/donar" style="background: var(--color-primario); color: white; padding: 0.6rem 1.5rem; border-radius: 50px; font-weight: 600; margin-left: 1rem; transition: transform 0.2s;">Donar</a>
       </nav>
     </header>
@@ -129,6 +131,70 @@ const currentPath = Astro.url.pathname;
         
       </div>
     </footer>
+
+        <!-- Botón de Accesibilidad -->
+    <button id="accessibility-btn" aria-label="Opciones de accesibilidad" style="position: fixed; bottom: 20px; left: 20px; z-index: 9998; background: #1a1a1a; color: white; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center; transition: transform 0.2s;">
+      ♿
+    </button>
+
+    <!-- Panel de Accesibilidad -->
+    <div id="accessibility-panel" style="display: none; position: fixed; bottom: 80px; left: 20px; z-index: 9999; background: white; border: 1px solid #eaeaea; border-radius: 15px; padding: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.15); width: 250px;">
+      <h3 style="margin-top: 0; font-size: 1.1rem; margin-bottom: 1rem; color: #1a1a1a;">Opciones de Accesibilidad</h3>
+      
+      <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+        <button onclick="changeFontSize(1)" style="padding: 0.8rem; background: #f8f9fa; border: 1px solid #ccc; border-radius: 8px; cursor: pointer; font-weight: 600; text-align: left;">A+ Aumentar texto</button>
+        <button onclick="changeFontSize(-1)" style="padding: 0.8rem; background: #f8f9fa; border: 1px solid #ccc; border-radius: 8px; cursor: pointer; font-weight: 600; text-align: left;">A- Disminuir texto</button>
+        <button onclick="toggleContrast()" style="padding: 0.8rem; background: #f8f9fa; border: 1px solid #ccc; border-radius: 8px; cursor: pointer; font-weight: 600; text-align: left;">🌗 Alto contraste</button>
+        <button onclick="resetAccessibility()" style="padding: 0.8rem; background: #e0e0e0; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; text-align: left; margin-top: 0.5rem;">Restablecer</button>
+      </div>
+    </div>
+
+    <!-- Estilos y Lógica del Widget -->
+    <style is:global>
+      /* Estilos para el Alto Contraste */
+      body.high-contrast {
+        background-color: #000 !important;
+        color: #fff !important;
+      }
+      body.high-contrast main, body.high-contrast footer, body.high-contrast header, body.high-contrast section, body.high-contrast div, body.high-contrast h1, body.high-contrast h2, body.high-contrast h3, body.high-contrast p, body.high-contrast a, body.high-contrast span, body.high-contrast li {
+        background-color: #000 !important;
+        color: #ffeb3b !important; /* Texto amarillo para máximo contraste */
+      }
+      body.high-contrast img { filter: grayscale(100%) contrast(120%); }
+      body.high-contrast button, body.high-contrast a[style*="background"] {
+        background-color: #ffeb3b !important;
+        color: #000 !important;
+        border: 2px solid #fff !important;
+      }
+    </style>
+
+    <script is:inline>
+      const accBtn = document.getElementById('accessibility-btn');
+      const accPanel = document.getElementById('accessibility-panel');
+      let currentFontSize = 100; // Porcentaje inicial
+
+      accBtn.addEventListener('click', () => {
+        accPanel.style.display = accPanel.style.display === 'none' ? 'block' : 'none';
+      });
+
+      function changeFontSize(direction) {
+        currentFontSize += direction * 10;
+        // Límites: mínimo 80%, máximo 150%
+        if (currentFontSize < 80) currentFontSize = 80;
+        if (currentFontSize > 150) currentFontSize = 150;
+        document.documentElement.style.fontSize = `${currentFontSize}%`;
+      }
+
+      function toggleContrast() {
+        document.body.classList.toggle('high-contrast');
+      }
+
+      function resetAccessibility() {
+        currentFontSize = 100;
+        document.documentElement.style.fontSize = '100%';
+        document.body.classList.remove('high-contrast');
+      }
+    </script>
 
      <!-- Ko-fi -->
     <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js' is:inline></script>

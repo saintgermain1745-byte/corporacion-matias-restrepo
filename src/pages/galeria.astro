@@ -1,28 +1,61 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// Aquí definimos los eventos (círculos) y las fotos que pertenecen a cada uno.
-// Para agregar más fotos a un evento, solo añade la ruta (ej. "/5.jpg") dentro de los corchetes.
+// Eventos con sus fotos y textos descriptivos (Alt)
 const eventos = [
   {
     nombre: "Navidad",
     portada: "/1.jpg",
-    fotos: ["/1.jpg", "/2.jpg", "/3.jpg", "/4.jpg", "/5.jpg", "/6.jpg"]
+    fotos: [
+      { src: "/1.jpg", alt: "Voluntarios en jornada navideña con la comunidad" },
+      { src: "/2.jpg", alt: "Entrega de regalos y apoyo a familias en Guarne" },
+      { src: "/3.jpg", alt: "Niños y familias sonriendo durante la actividad" },
+      { src: "/4.jpg", alt: "Celebración comunitaria con los beneficiarios" },
+      { src: "/5.jpg", alt: "Integrante de la fundación disfrazado en jornada especial" },
+      { src: "/6.jpg", alt: "Acompañamiento a personas con discapacidad en Guarne" }
+    ]
   },
   {
     nombre: "Mercados",
     portada: "/9.jpg",
-    fotos: ["/7.jpg", "/8.jpg", "/9.jpg", "/10.jpg", "/11.jpg"]
+    fotos: [
+      { src: "/7.jpg", alt: "Grupo de voluntarios y beneficiarios reunidos" },
+      { src: "/8.jpg", alt: "Jornada de integración en el Oriente Antioqueño" },
+      { src: "/9.jpg", alt: "Entrega de mercado familiar a persona de la comunidad" },
+      { src: "/10.jpg", alt: "Reunión y taller con la comunidad sobre salud y apoyo" },
+      { src: "/11.jpg", alt: "Insumos y víveres listos para ser entregados" }
+    ]
   },
   {
     nombre: "Comunidad",
     portada: "/14.jpg",
-    fotos: ["/12.jpg", "/13.jpg", "/14.jpg", "/15.jpg"]
+    fotos: [
+      { src: "/12.jpg", alt: "Preparación de mercados para familias de bajos recursos" },
+      { src: "/13.jpg", alt: "Apoyo y acompañamiento a paciente con cáncer" },
+      { src: "/14.jpg", alt: "Caminata y actividad física por la salud" },
+      { src: "/15.jpg", alt: "Entrega de ayudas humanitarias en zona rural" }
+    ]
   }
 ];
 
-// Creamos un arreglo con TODAS las fotos para cuando el usuario haga clic en la galería general
-const todasLasFotos = ["/1.jpg", "/2.jpg", "/3.jpg", "/4.jpg", "/5.jpg", "/6.jpg", "/7.jpg", "/8.jpg", "/9.jpg", "/10.jpg", "/11.jpg", "/12.jpg", "/13.jpg", "/14.jpg", "/15.jpg"];
+// Todas las fotos para la galería principal, con sus textos descriptivos
+const todasLasFotos = [
+  { src: "/1.jpg", alt: "Voluntarios en jornada navideña con la comunidad" },
+  { src: "/2.jpg", alt: "Entrega de regalos y apoyo a familias en Guarne" },
+  { src: "/3.jpg", alt: "Niños y familias sonriendo durante la actividad" },
+  { src: "/4.jpg", alt: "Celebración comunitaria con los beneficiarios" },
+  { src: "/5.jpg", alt: "Integrante de la fundación disfrazado en jornada especial" },
+  { src: "/6.jpg", alt: "Acompañamiento a personas con discapacidad en Guarne" },
+  { src: "/7.jpg", alt: "Grupo de voluntarios y beneficiarios reunidos" },
+  { src: "/8.jpg", alt: "Jornada de integración en el Oriente Antioqueño" },
+  { src: "/9.jpg", alt: "Entrega de mercado familiar a persona de la comunidad" },
+  { src: "/10.jpg", alt: "Reunión y taller con la comunidad sobre salud y apoyo" },
+  { src: "/11.jpg", alt: "Insumos y víveres listos para ser entregados" },
+  { src: "/12.jpg", alt: "Preparación de mercados para familias de bajos recursos" },
+  { src: "/13.jpg", alt: "Apoyo y acompañamiento a paciente con cáncer" },
+  { src: "/14.jpg", alt: "Caminata y actividad física por la salud" },
+  { src: "/15.jpg", alt: "Entrega de ayudas humanitarias en zona rural" }
+];
 ---
 
 <BaseLayout title="Galería">
@@ -38,9 +71,9 @@ const todasLasFotos = ["/1.jpg", "/2.jpg", "/3.jpg", "/4.jpg", "/5.jpg", "/6.jpg
     <div style="display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1.5rem; margin-bottom: 3rem; justify-content: center; flex-wrap: wrap;" data-aos="fade-up">
       
       {eventos.map((evento) => (
-        <div style="text-align: center; cursor: pointer;" onclick={`openLightbox(${JSON.stringify(evento.fotos)}, 0)`}>
+        <div style="text-align: center; cursor: pointer;" onclick={`openLightbox(${JSON.stringify(evento.fotos.map(f => f.src))}, 0)`}>
           <div style="width: 90px; height: 90px; border-radius: 50%; padding: 3px; background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); transition: transform 0.3s ease;" class="history-circle">
-            <img src={evento.portada} alt={evento.nombre} style="width: 100%; height: 100%; border-radius: 50%; border: 3px solid white; object-fit: cover;" />
+            <img src={evento.portada} alt={`Portada del evento ${evento.nombre}`} style="width: 100%; height: 100%; border-radius: 50%; border: 3px solid white; object-fit: cover;" />
           </div>
           <p style="margin-top: 0.5rem; font-size: 0.9rem; font-weight: 600; color: #333;">{evento.nombre}</p>
         </div>
@@ -56,10 +89,10 @@ const todasLasFotos = ["/1.jpg", "/2.jpg", "/3.jpg", "/4.jpg", "/5.jpg", "/6.jpg
       {todasLasFotos.map((foto, index) => (
         <div 
           class="gallery-item" 
-          onclick={`openLightbox(${JSON.stringify(todasLasFotos)}, ${index})`}
+          onclick={`openLightbox(${JSON.stringify(todasLasFotos.map(f => f.src))}, ${index})`}
           style="break-inside: avoid; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: pointer;"
         >
-          <img src={foto} alt={`Foto ${index + 1}`} loading="lazy" style="width: 100%; display: block; transition: transform 0.4s ease;" class="gallery-img" />
+          <img src={foto.src} alt={foto.alt} loading="lazy" style="width: 100%; display: block; transition: transform 0.4s ease;" class="gallery-img" />
         </div>
       ))}
     </div>
@@ -87,11 +120,10 @@ const todasLasFotos = ["/1.jpg", "/2.jpg", "/3.jpg", "/4.jpg", "/5.jpg", "/6.jpg
   </div>
 
   <style is:global>
-    /* Masonry Grid - Ahora con más columnas (fotos más pequeñas) */
     .masonry-gallery { column-count: 1; }
     @media (min-width: 600px) { .masonry-gallery { column-count: 2; } }
     @media (min-width: 900px) { .masonry-gallery { column-count: 3; } }
-    @media (min-width: 1200px) { .masonry-gallery { column-count: 4; } } /* 4 columnas en PC */
+    @media (min-width: 1200px) { .masonry-gallery { column-count: 4; } }
     
     .gallery-item:hover .gallery-img { transform: scale(1.05); }
     .history-circle:hover { transform: scale(1.05); }
@@ -108,7 +140,6 @@ const todasLasFotos = ["/1.jpg", "/2.jpg", "/3.jpg", "/4.jpg", "/5.jpg", "/6.jpg
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
 
-    // Función que recibe el array de fotos (sea de un círculo o de todas)
     function openLightbox(imagesArray, index) {
       currentImages = imagesArray;
       currentIndex = index;

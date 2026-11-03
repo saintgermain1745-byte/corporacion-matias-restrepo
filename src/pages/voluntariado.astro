@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Voluntariado">
+  <section style="padding: 5rem 5% 3rem; text-align: center; background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);" data-aos="fade-up">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">Sé parte del cambio</h1>
+      <p style="font-size: 1.2rem; color: #555;">
+        En la Corporación Matías Restrepo creemos que el tiempo y el talento son tan valiosos como el dinero. Si quieres aportar tu grano de arena a nuestra comunidad en Guarne, este es tu lugar.
+      </p>
+    </div>
+  </section>
+
+  <!-- Áreas de Voluntariado -->
+  <section style="padding: 2rem 5% 4rem; max-width: 1000px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+      <div style="text-align: center;" data-aos="fade-up">
+        <span style="font-size: 2.5rem;">🛒</span>
+        <h3 style="margin-top: 1rem; color: #1a1a1a;">Logística y Mercados</h3>
+        <p style="color: #666; font-size: 0.95rem;">Ayúdanos a organizar, empacar y entregar los mercados a las familias.</p>
+      </div>
+      <div style="text-align: center;" data-aos="fade-up" data-aos-delay="100">
+        <span style="font-size: 2.5rem;">❤️</span>
+        <h3 style="margin-top: 1rem; color: #1a1a1a;">Acompañamiento</h3>
+        <p style="color: #666; font-size: 0.95rem;">Brinda compañía y apoyo emocional a pacientes con cáncer o personas con discapacidad.</p>
+      </div>
+      <div style="text-align: center;" data-aos="fade-up" data-aos-delay="200">
+        <span style="font-size: 2.5rem;">🩺</span>
+        <h3 style="margin-top: 1rem; color: #1a1a1a;">Profesionales de la Salud</h3>
+        <p style="color: #666; font-size: 0.95rem;">Si eres médico, enfermero, psicólogo o terapeuta, tu conocimiento es invaluable.</p>
+      </div>
+    </div>
+
+    <!-- Formulario de Voluntariado -->
+    <div style="background: #f8f9fa; padding: 3rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 5px solid var(--color-secundario);" data-aos="fade-up">
+      <h2 style="text-align: center; margin-bottom: 2rem;">Postúlate como Voluntario</h2>
+      
+      <form action="https://api.web3forms.com/submit" method="POST" style="display: flex; flex-direction: column; gap: 1.5rem;">
+        
+        <!-- Clave de Web3Forms (La misma que usamos en contacto) -->
+        <input type="hidden" name="access_key" value="7820c9c0-0ff2-4b3d-a685-d50f47d772df">
+        <!-- Asunto personalizado para diferenciar los correos -->
+        <input type="hidden" name="subject" value="Nueva solicitud de Voluntariado - Web">
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <label for="name" style="font-weight: 600;">Nombre completo</label>
+            <input type="text" name="name" id="name" required style="padding: 1rem; border: 1px solid #ccc; border-radius: 8px; font-family: inherit;" />
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <label for="phone" style="font-weight: 600;">Teléfono / WhatsApp</label>
+            <input type="tel" name="phone" id="phone" required style="padding: 1rem; border: 1px solid #ccc; border-radius: 8px; font-family: inherit;" />
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <label for="email" style="font-weight: 600;">Correo electrónico</label>
+          <input type="email" name="email" id="email" required style="padding: 1rem; border: 1px solid #ccc; border-radius: 8px; font-family: inherit;" />
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <label for="area" style="font-weight: 600;">¿En qué área te gustaría ayudar?</label>
+          <select name="area" id="area" required style="padding: 1rem; border: 1px solid #ccc; border-radius: 8px; font-family: inherit; background: white;">
+            <option value="Logística y mercados">Logística y entrega de mercados</option>
+            <option value="Acompañamiento">Acompañamiento a pacientes/familias</option>
+            <option value="Salud">Profesional de la salud</option>
+            <option value="Comunicaciones">Diseño, fotografía o redes sociales</option>
+            <option value="Otro">Otro / Todas las anteriores</option>
+          </select>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <label for="message" style="font-weight: 600;">Cuéntanos un poco sobre ti (opcional)</label>
+          <textarea name="message" id="message" rows="3" style="padding: 1rem; border: 1px solid #ccc; border-radius: 8px; font-family: inherit; resize: vertical;"></textarea>
+        </div>
+
+        <button type="submit" style="background: var(--color-secundario); color: white; padding: 1rem 2rem; border: none; border-radius: 50px; font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: background 0.3s; margin-top: 1rem;">
+          Enviar Postulación
+        </button>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
