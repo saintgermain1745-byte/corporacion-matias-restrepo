@@ -1,5 +1,28 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Aquí definimos los eventos (círculos) y las fotos que pertenecen a cada uno.
+// Para agregar más fotos a un evento, solo añade la ruta (ej. "/5.jpg") dentro de los corchetes.
+const eventos = [
+  {
+    nombre: "Navidad",
+    portada: "/1.jpg",
+    fotos: ["/1.jpg", "/2.jpg", "/3.jpg", "/4.jpg", "/5.jpg", "/6.jpg"]
+  },
+  {
+    nombre: "Mercados",
+    portada: "/9.jpg",
+    fotos: ["/7.jpg", "/8.jpg", "/9.jpg", "/10.jpg", "/11.jpg"]
+  },
+  {
+    nombre: "Comunidad",
+    portada: "/14.jpg",
+    fotos: ["/12.jpg", "/13.jpg", "/14.jpg", "/15.jpg"]
+  }
+];
+
+// Creamos un arreglo con TODAS las fotos para cuando el usuario haga clic en la galería general
+const todasLasFotos = ["/1.jpg", "/2.jpg", "/3.jpg", "/4.jpg", "/5.jpg", "/6.jpg", "/7.jpg", "/8.jpg", "/9.jpg", "/10.jpg", "/11.jpg", "/12.jpg", "/13.jpg", "/14.jpg", "/15.jpg"];
 ---
 
 <BaseLayout title="Galería">
@@ -13,64 +36,38 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <!-- Destacados (Estilo Historias de Instagram) -->
     <div style="display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1.5rem; margin-bottom: 3rem; justify-content: center; flex-wrap: wrap;" data-aos="fade-up">
-      <!-- Evento 1 -->
-      <div style="text-align: center; cursor: pointer;">
-        <div style="width: 90px; height: 90px; border-radius: 50%; padding: 3px; background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);">
-          <img src="/1.jpg" alt="Evento 1" style="width: 100%; height: 100%; border-radius: 50%; border: 3px solid white; object-fit: cover;" />
+      
+      {eventos.map((evento) => (
+        <div style="text-align: center; cursor: pointer;" onclick={`openLightbox(${JSON.stringify(evento.fotos)}, 0)`}>
+          <div style="width: 90px; height: 90px; border-radius: 50%; padding: 3px; background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); transition: transform 0.3s ease;" class="history-circle">
+            <img src={evento.portada} alt={evento.nombre} style="width: 100%; height: 100%; border-radius: 50%; border: 3px solid white; object-fit: cover;" />
+          </div>
+          <p style="margin-top: 0.5rem; font-size: 0.9rem; font-weight: 600; color: #333;">{evento.nombre}</p>
         </div>
-        <p style="margin-top: 0.5rem; font-size: 0.9rem; font-weight: 600; color: #333;">Navidad</p>
-      </div>
-      <!-- Evento 2 -->
-      <div style="text-align: center; cursor: pointer;">
-        <div style="width: 90px; height: 90px; border-radius: 50%; padding: 3px; background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);">
-          <img src="/9.jpg" alt="Evento 2" style="width: 100%; height: 100%; border-radius: 50%; border: 3px solid white; object-fit: cover;" />
-        </div>
-        <p style="margin-top: 0.5rem; font-size: 0.9rem; font-weight: 600; color: #333;">Mercados</p>
-      </div>
-      <!-- Evento 3 -->
-      <div style="text-align: center; cursor: pointer;">
-        <div style="width: 90px; height: 90px; border-radius: 50%; padding: 3px; background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);">
-          <img src="/3.jpg" alt="Evento 3" style="width: 100%; height: 100%; border-radius: 50%; border: 3px solid white; object-fit: cover;" />
-        </div>
-        <p style="margin-top: 0.5rem; font-size: 0.9rem; font-weight: 600; color: #333;">Comunidad</p>
-      </div>
-      <!-- Evento 4 -->
-      <div style="text-align: center; cursor: pointer;">
-        <div style="width: 90px; height: 90px; border-radius: 50%; padding: 3px; background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);">
-          <img src="/13.jpg" alt="Evento 4" style="width: 100%; height: 100%; border-radius: 50%; border: 3px solid white; object-fit: cover;" />
-        </div>
-        <p style="margin-top: 0.5rem; font-size: 0.9rem; font-weight: 600; color: #333;">Apoyo</p>
-      </div>
+      ))}
+
     </div>
 
     <!-- Títulos de Eventos -->
     <h2 style="text-align: center; margin-bottom: 2rem; font-size: 2rem;">Todos los Momentos</h2>
 
-    <!-- Galería Masonry (Estilo Pinterest/Instagram) -->
-    <div style="column-count: 1; column-gap: 1.5rem;" class="masonry-gallery" id="gallery-grid">
-      <!-- Usamos un script para generar las imágenes o las ponemos manualmente -->
-      <div class="gallery-item" style="break-inside: avoid; margin-bottom: 1.5rem; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: pointer;"><img src="/1.jpg" alt="Foto 1" loading="lazy" style="width: 100%; display: block; transition: transform 0.4s ease;" class="gallery-img" /></div>
-      <div class="gallery-item" style="break-inside: avoid; margin-bottom: 1.5rem; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: pointer;"><img src="/2.jpg" alt="Foto 2" loading="lazy" style="width: 100%; display: block; transition: transform 0.4s ease;" class="gallery-img" /></div>
-      <div class="gallery-item" style="break-inside: avoid; margin-bottom: 1.5rem; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: pointer;"><img src="/3.jpg" alt="Foto 3" loading="lazy" style="width: 100%; display: block; transition: transform 0.4s ease;" class="gallery-img" /></div>
-      <div class="gallery-item" style="break-inside: avoid; margin-bottom: 1.5rem; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: pointer;"><img src="/4.jpg" alt="Foto 4" loading="lazy" style="width: 100%; display: block; transition: transform 0.4s ease;" class="gallery-img" /></div>
-      <div class="gallery-item" style="break-inside: avoid; margin-bottom: 1.5rem; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: pointer;"><img src="/5.jpg" alt="Foto 5" loading="lazy" style="width: 100%; display: block; transition: transform 0.4s ease;" class="gallery-img" /></div>
-      <div class="gallery-item" style="break-inside: avoid; margin-bottom: 1.5rem; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: pointer;"><img src="/6.jpg" alt="Foto 6" loading="lazy" style="width: 100%; display: block; transition: transform 0.4s ease;" class="gallery-img" /></div>
-      <div class="gallery-item" style="break-inside: avoid; margin-bottom: 1.5rem; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: pointer;"><img src="/7.jpg" alt="Foto 7" loading="lazy" style="width: 100%; display: block; transition: transform 0.4s ease;" class="gallery-img" /></div>
-      <div class="gallery-item" style="break-inside: avoid; margin-bottom: 1.5rem; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: pointer;"><img src="/8.jpg" alt="Foto 8" loading="lazy" style="width: 100%; display: block; transition: transform 0.4s ease;" class="gallery-img" /></div>
-      <div class="gallery-item" style="break-inside: avoid; margin-bottom: 1.5rem; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: pointer;"><img src="/9.jpg" alt="Foto 9" loading="lazy" style="width: 100%; display: block; transition: transform 0.4s ease;" class="gallery-img" /></div>
-      <div class="gallery-item" style="break-inside: avoid; margin-bottom: 1.5rem; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: pointer;"><img src="/10.jpg" alt="Foto 10" loading="lazy" style="width: 100%; display: block; transition: transform 0.4s ease;" class="gallery-img" /></div>
-      <div class="gallery-item" style="break-inside: avoid; margin-bottom: 1.5rem; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: pointer;"><img src="/11.jpg" alt="Foto 11" loading="lazy" style="width: 100%; display: block; transition: transform 0.4s ease;" class="gallery-img" /></div>
-      <div class="gallery-item" style="break-inside: avoid; margin-bottom: 1.5rem; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: pointer;"><img src="/12.jpg" alt="Foto 12" loading="lazy" style="width: 100%; display: block; transition: transform 0.4s ease;" class="gallery-img" /></div>
-      <div class="gallery-item" style="break-inside: avoid; margin-bottom: 1.5rem; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: pointer;"><img src="/13.jpg" alt="Foto 13" loading="lazy" style="width: 100%; display: block; transition: transform 0.4s ease;" class="gallery-img" /></div>
-      <div class="gallery-item" style="break-inside: avoid; margin-bottom: 1.5rem; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: pointer;"><img src="/14.jpg" alt="Foto 14" loading="lazy" style="width: 100%; display: block; transition: transform 0.4s ease;" class="gallery-img" /></div>
-      <div class="gallery-item" style="break-inside: avoid; margin-bottom: 1.5rem; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: pointer;"><img src="/15.jpg" alt="Foto 15" loading="lazy" style="width: 100%; display: block; transition: transform 0.4s ease;" class="gallery-img" /></div>
+    <!-- Galería Masonry (Más pequeña y elegante) -->
+    <div class="masonry-gallery" id="gallery-grid">
+      {todasLasFotos.map((foto, index) => (
+        <div 
+          class="gallery-item" 
+          onclick={`openLightbox(${JSON.stringify(todasLasFotos)}, ${index})`}
+          style="break-inside: avoid; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: pointer;"
+        >
+          <img src={foto} alt={`Foto ${index + 1}`} loading="lazy" style="width: 100%; display: block; transition: transform 0.4s ease;" class="gallery-img" />
+        </div>
+      ))}
     </div>
 
-    <!-- Sección de Videos (Se mantiene igual) -->
+    <!-- Sección de Videos -->
     <div style="margin-top: 5rem;" data-aos="fade-up">
       <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">Nuestros Videos</h2>
       <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
-        <!-- Los 6 videos de Shorts aquí -->
         <div style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); aspect-ratio: 9 / 16; width: 100%; max-width: 320px;"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/2B2xj6OnPYo" frameborder="0" allowfullscreen></iframe></div>
         <div style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); aspect-ratio: 9 / 16; width: 100%; max-width: 320px;"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/mlahIPTVGMI" frameborder="0" allowfullscreen></iframe></div>
         <div style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); aspect-ratio: 9 / 16; width: 100%; max-width: 320px;"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/qF7tzb3yn44" frameborder="0" allowfullscreen></iframe></div>
@@ -81,7 +78,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <!-- Lightbox (Se mantiene igual) -->
+  <!-- Lightbox -->
   <div id="lightbox" style="display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); justify-content: center; align-items: center; backdrop-filter: blur(5px);">
     <span onclick="closeLightbox()" style="position: absolute; top: 20px; right: 40px; color: #fff; font-size: 50px; font-weight: bold; cursor: pointer; z-index: 10000;">&times;</span>
     <span onclick="changeImage(-1)" style="position: absolute; left: 20px; color: #fff; font-size: 50px; font-weight: bold; cursor: pointer; padding: 20px; z-index: 10000; user-select: none;">&#10094;</span>
@@ -90,50 +87,45 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </div>
 
   <style is:global>
-    /* Estilos para el Masonry Grid */
-    .masonry-gallery {
-      column-count: 1;
-    }
-    @media (min-width: 600px) {
-      .masonry-gallery { column-count: 2; }
-    }
-    @media (min-width: 900px) {
-      .masonry-gallery { column-count: 3; }
-    }
+    /* Masonry Grid - Ahora con más columnas (fotos más pequeñas) */
+    .masonry-gallery { column-count: 1; }
+    @media (min-width: 600px) { .masonry-gallery { column-count: 2; } }
+    @media (min-width: 900px) { .masonry-gallery { column-count: 3; } }
+    @media (min-width: 1200px) { .masonry-gallery { column-count: 4; } } /* 4 columnas en PC */
     
-    .gallery-item:hover .gallery-img {
-      transform: scale(1.05);
-    }
+    .gallery-item:hover .gallery-img { transform: scale(1.05); }
+    .history-circle:hover { transform: scale(1.05); }
+    
     @media (max-width: 768px) {
       #lightbox span[onclick^="changeImage"] { display: none; }
     }
   </style>
 
   <script is:inline>
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const images = Array.from(galleryItems).map(item => item.querySelector('img').src);
+    let currentImages = [];
+    let currentIndex = 0;
+    
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
-    let currentIndex = 0;
 
-    galleryItems.forEach((item, index) => {
-      item.addEventListener('click', () => {
-        currentIndex = index;
-        updateLightbox();
-      });
-    });
+    // Función que recibe el array de fotos (sea de un círculo o de todas)
+    function openLightbox(imagesArray, index) {
+      currentImages = imagesArray;
+      currentIndex = index;
+      updateLightbox();
+    }
 
     function updateLightbox() {
-      lightboxImg.src = images[currentIndex];
+      lightboxImg.src = currentImages[currentIndex];
       lightbox.style.display = 'flex';
       document.body.style.overflow = 'hidden';
     }
 
     function changeImage(direction) {
-      currentIndex = (currentIndex + direction + images.length) % images.length;
+      currentIndex = (currentIndex + direction + currentImages.length) % currentImages.length;
       lightboxImg.style.opacity = '0';
       setTimeout(() => {
-        lightboxImg.src = images[currentIndex];
+        lightboxImg.src = currentImages[currentIndex];
         lightboxImg.style.opacity = '1';
       }, 150);
     }
