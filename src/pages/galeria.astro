@@ -11,93 +11,142 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
 
     <!-- Cuadrícula de Imágenes -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;">
       
       <!-- Imagen 1 -->
-      <div data-aos="fade-up" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s ease;">
-        <img src="/1.jpg" alt="Labor de la fundación 1" loading="lazy" style="width: 100%; height: 250px; object-fit: cover; transition: transform 0.5s ease;" />
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="50" onclick="openLightbox('/1.jpg')" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; aspect-ratio: 4/3;">
+        <img src="/1.jpg" alt="Labor de la fundación 1" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="gallery-img" />
       </div>
       
       <!-- Imagen 2 -->
-      <div data-aos="fade-up" data-aos-delay="50" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s ease;">
-        <img src="/2.jpg" alt="Labor de la fundación 2" loading="lazy" style="width: 100%; height: 250px; object-fit: cover; transition: transform 0.5s ease;" />
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="50" onclick="openLightbox('/2.jpg')" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; aspect-ratio: 4/3;">
+        <img src="/2.jpg" alt="Labor de la fundación 2" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="gallery-img" />
       </div>
 
       <!-- Imagen 3 -->
-      <div data-aos="fade-up" data-aos-delay="100" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s ease;">
-        <img src="/3.jpg" alt="Labor de la fundación 3" loading="lazy" style="width: 100%; height: 250px; object-fit: cover; transition: transform 0.5s ease;" />
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="50" onclick="openLightbox('/3.jpg')" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; aspect-ratio: 4/3;">
+        <img src="/3.jpg" alt="Labor de la fundación 3" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="gallery-img" />
       </div>
 
       <!-- Imagen 4 -->
-      <div data-aos="fade-up" data-aos-delay="150" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s ease;">
-        <img src="/4.jpg" alt="Labor de la fundación 4" loading="lazy" style="width: 100%; height: 250px; object-fit: cover; transition: transform 0.5s ease;" />
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="50" onclick="openLightbox('/4.jpg')" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; aspect-ratio: 4/3;">
+        <img src="/4.jpg" alt="Labor de la fundación 4" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="gallery-img" />
       </div>
 
       <!-- Imagen 5 -->
-      <div data-aos="fade-up" data-aos-delay="200" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s ease;">
-        <img src="/5.jpg" alt="Labor de la fundación 5" loading="lazy" style="width: 100%; height: 250px; object-fit: cover; transition: transform 0.5s ease;" />
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="50" onclick="openLightbox('/5.jpg')" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; aspect-ratio: 4/3;">
+        <img src="/5.jpg" alt="Labor de la fundación 5" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="gallery-img" />
       </div>
 
       <!-- Imagen 6 -->
-      <div data-aos="fade-up" data-aos-delay="250" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s ease;">
-        <img src="/6.jpg" alt="Labor de la fundación 6" loading="lazy" style="width: 100%; height: 250px; object-fit: cover; transition: transform 0.5s ease;" />
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="50" onclick="openLightbox('/6.jpg')" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; aspect-ratio: 4/3;">
+        <img src="/6.jpg" alt="Labor de la fundación 6" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="gallery-img" />
       </div>
 
       <!-- Imagen 7 -->
-      <div data-aos="fade-up" data-aos-delay="300" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s ease;">
-        <img src="/7.jpg" alt="Labor de la fundación 7" loading="lazy" style="width: 100%; height: 250px; object-fit: cover; transition: transform 0.5s ease;" />
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="50" onclick="openLightbox('/7.jpg')" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; aspect-ratio: 4/3;">
+        <img src="/7.jpg" alt="Labor de la fundación 7" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="gallery-img" />
       </div>
 
       <!-- Imagen 8 -->
-      <div data-aos="fade-up" data-aos-delay="350" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s ease;">
-        <img src="/8.jpg" alt="Labor de la fundación 8" loading="lazy" style="width: 100%; height: 250px; object-fit: cover; transition: transform 0.5s ease;" />
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="50" onclick="openLightbox('/8.jpg')" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; aspect-ratio: 4/3;">
+        <img src="/8.jpg" alt="Labor de la fundación 8" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="gallery-img" />
       </div>
 
       <!-- Imagen 9 -->
-      <div data-aos="fade-up" data-aos-delay="400" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s ease;">
-        <img src="/9.jpg" alt="Labor de la fundación 9" loading="lazy" style="width: 100%; height: 250px; object-fit: cover; transition: transform 0.5s ease;" />
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="50" onclick="openLightbox('/9.jpg')" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; aspect-ratio: 4/3;">
+        <img src="/9.jpg" alt="Labor de la fundación 9" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="gallery-img" />
       </div>
 
       <!-- Imagen 10 -->
-      <div data-aos="fade-up" data-aos-delay="450" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s ease;">
-        <img src="/10.jpg" alt="Labor de la fundación 10" loading="lazy" style="width: 100%; height: 250px; object-fit: cover; transition: transform 0.5s ease;" />
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="50" onclick="openLightbox('/10.jpg')" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; aspect-ratio: 4/3;">
+        <img src="/10.jpg" alt="Labor de la fundación 10" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="gallery-img" />
       </div>
 
       <!-- Imagen 11 -->
-      <div data-aos="fade-up" data-aos-delay="500" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s ease;">
-        <img src="/11.jpg" alt="Labor de la fundación 11" loading="lazy" style="width: 100%; height: 250px; object-fit: cover; transition: transform 0.5s ease;" />
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="50" onclick="openLightbox('/11.jpg')" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; aspect-ratio: 4/3;">
+        <img src="/11.jpg" alt="Labor de la fundación 11" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="gallery-img" />
       </div>
 
       <!-- Imagen 12 -->
-      <div data-aos="fade-up" data-aos-delay="550" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s ease;">
-        <img src="/12.jpg" alt="Labor de la fundación 12" loading="lazy" style="width: 100%; height: 250px; object-fit: cover; transition: transform 0.5s ease;" />
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="50" onclick="openLightbox('/12.jpg')" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; aspect-ratio: 4/3;">
+        <img src="/12.jpg" alt="Labor de la fundación 12" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="gallery-img" />
       </div>
 
       <!-- Imagen 13 -->
-      <div data-aos="fade-up" data-aos-delay="600" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s ease;">
-        <img src="/13.jpg" alt="Labor de la fundación 13" loading="lazy" style="width: 100%; height: 250px; object-fit: cover; transition: transform 0.5s ease;" />
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="50" onclick="openLightbox('/13.jpg')" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; aspect-ratio: 4/3;">
+        <img src="/13.jpg" alt="Labor de la fundación 13" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="gallery-img" />
       </div>
 
       <!-- Imagen 14 -->
-      <div data-aos="fade-up" data-aos-delay="650" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s ease;">
-        <img src="/14.jpg" alt="Labor de la fundación 14" loading="lazy" style="width: 100%; height: 250px; object-fit: cover; transition: transform 0.5s ease;" />
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="50" onclick="openLightbox('/14.jpg')" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; aspect-ratio: 4/3;">
+        <img src="/14.jpg" alt="Labor de la fundación 14" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="gallery-img" />
       </div>
 
       <!-- Imagen 15 -->
-      <div data-aos="fade-up" data-aos-delay="700" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s ease;">
-        <img src="/15.jpg" alt="Labor de la fundación 15" loading="lazy" style="width: 100%; height: 250px; object-fit: cover; transition: transform 0.5s ease;" />
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="50" onclick="openLightbox('/15.jpg')" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; aspect-ratio: 4/3;">
+        <img src="/15.jpg" alt="Labor de la fundación 15" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="gallery-img" />
       </div>
 
     </div>
 
-    <!-- Sección de Video (Se mantiene igual) -->
-    <div style="margin-top: 5rem;" data-aos="fade-up">
-      <h2 style="text-align: center; margin-bottom: 2rem;">Nuestro Impacto en Video</h2>
-      <div style="border-radius: 15px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.15); aspect-ratio: 16 / 9;">
-        <!-- Aquí puedes pegar el iframe de un video de YouTube de la fundación más adelante -->
+    <!-- Sección de Video -->
+    <div style="margin-top: 6rem;" data-aos="fade-up">
+      <h2 style="text-align: center; margin-bottom: 2rem; font-size: 2.5rem;">Nuestro Impacto en Video</h2>
+      <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); aspect-ratio: 16 / 9; background: #000;">
+        <!-- REEMPLAZA EL ENLACE DE ABAJO CON EL ID DE TU VIDEO REAL DE YOUTUBE -->
+        <!-- Por ejemplo, si tu video es youtube.com/watch?v=AbC123Xyz, pones AbC123Xyz -->
         <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
 
   </section>
+
+  <!-- Lightbox (Capa oscura para ver la foto en grande) -->
+  <div id="lightbox" style="display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; backdrop-filter: blur(5px);">
+    <span onclick="closeLightbox()" style="position: absolute; top: 20px; right: 40px; color: #fff; font-size: 50px; font-weight: bold; cursor: pointer; transition: color 0.3s;">&times;</span>
+    <img id="lightbox-img" src="" alt="Imagen ampliada" style="max-width: 90%; max-height: 90%; border-radius: 10px; box-shadow: 0 0 30px rgba(255,255,255,0.2); object-fit: contain;" />
+  </div>
+
+  <!-- Estilos para los efectos de la galería -->
+  <style>
+    .gallery-item:hover .gallery-img {
+      transform: scale(1.1); /* Hace un efecto de zoom al pasar el ratón */
+    }
+    #lightbox span:hover {
+      color: #c1121f; /* El rojo de tu marca */
+    }
+  </style>
+
+  <!-- Script del Lightbox -->
+  <script is:inline>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    function openLightbox(src) {
+      lightboxImg.src = src;
+      lightbox.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // Evita hacer scroll de fondo
+    }
+
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+      lightboxImg.src = '';
+      document.body.style.overflow = 'auto'; // Devuelve el scroll
+    }
+
+    // Cierra el lightbox si se hace clic fuera de la imagen
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    // Cierra el lightbox con la tecla Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+        closeLightbox();
+      }
+    });
+  </script>
 </BaseLayout>
