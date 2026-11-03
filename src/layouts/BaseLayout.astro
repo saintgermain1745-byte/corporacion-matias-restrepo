@@ -32,6 +32,24 @@ const currentPath = Astro.url.pathname;
         </div>
     
     <style is:global>
+              /* Blindaje contra desbordamiento horizontal */
+      html, body {
+        overflow-x: hidden;
+        max-width: 100vw;
+      }
+      *, *::before, *::after {
+        box-sizing: border-box;
+      }
+
+      /* Ajuste del botón de Ko-fi en móviles */
+      @media (max-width: 768px) {
+        /* Hacemos el botón un poco más pequeño y lo pegamos a la esquina */
+        .floatingchat-container-wrap, 
+        .floatingchat-container-wrap-mobi {
+          transform: scale(0.85);
+          transform-origin: bottom left;
+        }
+      }
       :root {
         --color-primario: #c1121f;
         --color-secundario: #2a9d8f;
