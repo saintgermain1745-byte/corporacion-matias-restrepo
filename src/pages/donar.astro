@@ -134,15 +134,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <!-- ESTILOS PARA EL EFECTO ZOOM DE LAS TARJETAS -->
   <style is:global>
     .tarjeta-donacion {
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      transition: all 0.3s ease !important;
     }
     .tarjeta-donacion:hover {
-      transform: translateY(-8px) scale(1.02); /* Se eleva y hace un zoom sutil */
-      box-shadow: 0 20px 40px rgba(0,0,0,0.12); /* Sombra más profunda */
-      border-color: #ccc;
+      transform: translateY(-10px) scale(1.03) !important; /* Fuerza el efecto sobre AOS */
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important; 
+      border-color: #c1121f !important; /* El borde se vuelve rojo para llamar la atención */
       z-index: 10;
     }
   </style>
