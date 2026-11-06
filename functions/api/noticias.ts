@@ -1,6 +1,5 @@
-// functions/api/noticias.ts
 export const onRequestGet = async (context: any) => {
-  const apiKey = context.env.GNEWS_API_KEY; // La clave se guarda de forma segura en Cloudflare
+  const apiKey = context.env.GNEWS_API_KEY;
   const url = `https://gnews.io/api/v4/top-headlines?category=health&lang=es&country=co&max=6&apikey=${apiKey}`;
 
   try {
@@ -16,7 +15,6 @@ export const onRequestGet = async (context: any) => {
       );
     }
 
-    // Solo devolvemos los campos que nos interesan para no saturar la web
     const noticias = data.articles.map((articulo: any) => ({
       titulo: articulo.title,
       descripcion: articulo.description,
