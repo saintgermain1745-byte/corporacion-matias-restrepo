@@ -75,11 +75,10 @@ const currentPath = Astro.url.pathname;
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
         transition: padding 0.4s ease, background 0.4s ease, box-shadow 0.4s ease, border-bottom 0.4s ease;
-        padding: 1.5rem 5%; /* Tamaño normal */
+        padding: 1.5rem 5%;
         border-bottom: 1px solid transparent;
       }
 
-      /* Cuando se hace scroll, se encoge */
       .main-header.scrolled {
         padding: 0.5rem 5% !important;
         background: rgba(255, 255, 255, 0.98);
@@ -87,13 +86,8 @@ const currentPath = Astro.url.pathname;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
       }
 
-      .main-header .logo-img {
-        width: 70px;
-        transition: width 0.4s ease;
-      }
-      .main-header.scrolled .logo-img {
-        width: 45px !important;
-      }
+      .main-header .logo-img { width: 70px; transition: width 0.4s ease; }
+      .main-header.scrolled .logo-img { width: 45px !important; }
 
       .main-header .logo-text {
         font-family: var(--fuente-titulos);
@@ -102,9 +96,7 @@ const currentPath = Astro.url.pathname;
         color: #1a1a1a;
         transition: font-size 0.4s ease;
       }
-      .main-header.scrolled .logo-text {
-        font-size: 1.2rem !important;
-      }
+      .main-header.scrolled .logo-text { font-size: 1.2rem !important; }
 
       /* Ajuste del botón de Ko-fi en móviles */
       @media (max-width: 768px) {
@@ -198,8 +190,8 @@ const currentPath = Astro.url.pathname;
       </div>
     </footer>
 
-    <!-- Botón de Accesibilidad -->
-    <button id="accessibility-btn" aria-label="Opciones de accesibilidad" style="position: fixed; bottom: 20px; right: 20px; z-index: 99999; background: #1a1a1a; color: white; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center; transition: transform 0.2s;">
+    <!-- Botón de Accesibilidad (Ahora rojo) -->
+    <button id="accessibility-btn" aria-label="Opciones de accesibilidad" style="position: fixed; bottom: 20px; right: 20px; z-index: 99999; background: var(--color-primario); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; box-shadow: 0 4px 15px rgba(193, 18, 31, 0.4); display: flex; justify-content: center; align-items: center; transition: transform 0.2s, background 0.3s;">
       ♿
     </button>
 
@@ -215,35 +207,59 @@ const currentPath = Astro.url.pathname;
       </div>
     </div>
 
-    <!-- UN SOLO BLOQUE DE SCRIPT PARA ACCESIBILIDAD Y STICKY HEADER -->
+    <!-- SCRIPT MAESTRO (Accesibilidad con persistencia + Sticky Header) -->
     <script is:inline>
-      // --- 1. LÓGICA DE ACCESIBILIDAD ---
+      // --- 1. LÓGICA DE ACCESIBILIDAD CON LOCALSTORAGE ---
       const accBtn = document.getElementById('accessibility-btn');
       const accPanel = document.getElementById('accessibility-panel');
-      let currentFontSize = 100;
+      
+      // Variables globales
+      let currentFontSize = parseInt(localStorage.getItem('acc-font-size')) || 100;
 
-      if (accBtn) {
-        accBtn.addEventListener('click', () => {
-          accPanel.style.display = accPanel.style.display === 'none' ? 'block' : 'none';
-        });
+      // Inicializar ajustes al cargar
+      function loadAccessibilitySettings() {
+        // Tamaño de fuente
+        document.documentElement.style.fontSize = `${currentFontSize}%`;
+        
+        // Alto contraste
+        const isHighContrast = localStorage.getItem('acc-high-contrast') === 'true';
+        if (isHighContrast) {
+          document.body.classList.add('high-contrast');
+        } else {
+          document.body.classList.remove('high-contrast');
+        }
       }
 
+      // Funciones controladas por los botones
       window.changeFontSize = function(direction) {
         currentFontSize += direction * 10;
         if (currentFontSize < 80) currentFontSize = 80;
         if (currentFontSize > 150) currentFontSize = 150;
+        
         document.documentElement.style.fontSize = `${currentFontSize}%`;
+        localStorage.setItem('acc-font-size', currentFontSize); // Guardar en el navegador
       };
 
       window.toggleContrast = function() {
         document.body.classList.toggle('high-contrast');
+        const isNowHighContrast = document.body.classList.contains('high-contrast');
+        localStorage.setItem('acc-high-contrast', isNowHighContrast); // Guardar en el navegador
       };
 
       window.resetAccessibility = function() {
         currentFontSize = 100;
         document.documentElement.style.fontSize = '100%';
         document.body.classList.remove('high-contrast');
+        localStorage.removeItem('acc-font-size');
+        localStorage.removeItem('acc-high-contrast');
       };
+
+      // Abrir/Cerrar panel
+      if (accBtn) {
+        accBtn.addEventListener('click', () => {
+          accPanel.style.display = accPanel.style.display === 'none' ? 'block' : 'none';
+        });
+      }
 
       // --- 2. LÓGICA DEL STICKY HEADER ---
       function initStickyHeader() {
@@ -264,8 +280,18 @@ const currentPath = Astro.url.pathname;
         handleHeaderScroll(); 
       }
 
-      document.addEventListener('astro:page-load', initStickyHeader);
-      document.addEventListener('DOMContentLoaded', initStickyHeader);
+      // --- 3. INICIALIZACIÓN EN ASTRO ---
+      // 'astro:page-load' se dispara cada vez que navegas a una nueva página
+      document.addEventListener('astro:page-load', () => {
+        loadAccessibilitySettings(); // Vuelve a aplicar los ajustes guardados
+        initStickyHeader();
+      });
+
+      // Fallback inicial
+      document.addEventListener('DOMContentLoaded', () => {
+        loadAccessibilitySettings();
+        initStickyHeader();
+      });
     </script> 
     
     <!-- Ko-fi -->
