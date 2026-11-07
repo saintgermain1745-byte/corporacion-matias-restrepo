@@ -129,8 +129,11 @@ const todasLasFotos = [
     .history-circle:hover { transform: scale(1.05); }
     
     @media (max-width: 768px) {
-      #lightbox span[onclick^="changeImage"] { display: none; }
+    .lightbox-arrow {
+        display: none !important;
+      }
     }
+
   </style>
 
   <script is:inline>
