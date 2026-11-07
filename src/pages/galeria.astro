@@ -128,8 +128,9 @@ const todasLasFotos = [
     .gallery-item:hover .gallery-img { transform: scale(1.05); }
     .history-circle:hover { transform: scale(1.05); }
     
-    @media (max-width: 768px) {
-    .lightbox-arrow {
+     /* Ocultar flechas en CUALQUIER dispositivo táctil (celulares y tablets) */
+    @media (hover: none) and (pointer: coarse) {
+      .lightbox-arrow {
         display: none !important;
       }
     }
