@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Home">
+  
+  <!-- Hero Section -->
+  <section style="padding: 6rem 5%; text-align: center; background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);">
+    <div style="max-width: 800px; margin: 0 auto;" data-aos="fade-up">
+      <h1 style="font-size: clamp(2.5rem, 6vw, 3.5rem); margin-bottom: 1.5rem; line-height: 1.1;">
+        Transforming lives in <span style="color: var(--color-secundario);">Eastern Antioquia</span>
+      </h1>
+      <p style="font-size: 1.2rem; color: #555; margin-bottom: 3rem; font-weight: 300;">
+        We support people with disabilities, cancer patients, and their families in Guarne. Because to heal a person, we must support their entire household.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="/en/donate" style="background: var(--color-primario); color: white; padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; transition: transform 0.2s; box-shadow: 0 4px 15px rgba(193, 18, 31, 0.3);">
+          Donate Now
+        </a>
+        <a href="#learn-more" style="background: transparent; color: var(--color-texto); padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; border: 1px solid #ccc;">
+          Learn More
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Pilares -->
+  <section id="learn-more" style="padding: 5rem 5%; max-width: 1200px; margin: 0 auto;">
+    <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem;" data-aos="fade-up">Our Work</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+      <!-- Pilar 1 -->
+      <div data-aos="fade-up" style="background: white; padding: 2.5rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 5px solid var(--color-primario);">
+        <h3 style="margin-top: 0; color: #1a1a1a;">Mobility & Disability</h3>
+        <p style="color: #666;">We support people in wheelchairs and with reduced mobility, providing supplies and companionship.</p>
+      </div>
+      <!-- Pilar 2 -->
+      <div data-aos="fade-up" data-aos-delay="100" style="background: white; padding: 2.5rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 5px solid var(--color-secundario);">
+        <h3 style="margin-top: 0; color: #1a1a1a;">Oncology Support</h3>
+        <p style="color: #666;">We accompany cancer patients and their families, facilitating access to treatments and emotional support.</p>
+      </div>
+      <!-- Pilar 3 -->
+      <div data-aos="fade-up" data-aos-delay="200" style="background: white; padding: 2.5rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 5px solid #e9c46a;">
+        <h3 style="margin-top: 0; color: #1a1a1a;">Food Security</h3>
+        <p style="color: #666;">We deliver groceries and food supplies to low-income families, ensuring no home goes without basic needs.</p>
+      </div>
+      <!-- Pilar 4 -->
+      <div data-aos="fade-up" data-aos-delay="300" style="background: white; padding: 2.5rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 5px solid #4a6fa5;">
+        <h3 style="margin-top: 0; color: #1a1a1a;">Community in Guarne</h3>
+        <p style="color: #666;">We build support networks in Eastern Antioquia, promoting inclusion and the well-being of the entire family environment.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Aliados -->
+  <section style="padding: 4rem 5%; background: #f8f9fa; text-align: center;" data-aos="fade-up">
+    <h2 style="font-size: 2rem; margin-bottom: 1rem;">Companies that support us</h2>
+    <p style="color: #666; margin-bottom: 3rem;">Thanks to their trust, we can continue transforming lives in Guarne.</p>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4rem; max-width: 1000px; margin: 0 auto;">
+      
+      <!-- Clickshopping -->
+      <img src="/aliados/Clickshopping.png" alt="Clickshopping" style="height: 60px; max-width: 150px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'" />
+      
+      <!-- CrytoAgro -->
+      <img src="/aliados/CrytoAgro.png" alt="CrytoAgro" style="height: 60px; max-width: 150px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'" />
+
+      <!-- Isotipo -->
+      <img src="/aliados/Isotipo.png" alt="Isotipo" style="height: 60px; max-width: 150px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'" />
+
+      <!-- Ultrasystem -->
+      <img src="/aliados/Ultrasystem.png" alt="Ultrasystem Technology" style="height: 60px; max-width: 150px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'" />
+      
+    </div>
+  </section>
+
+</BaseLayout>
