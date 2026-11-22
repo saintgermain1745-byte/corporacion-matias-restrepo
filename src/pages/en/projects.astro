@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Projects">
+  <section style="padding: 5rem 5% 3rem; text-align: center; background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);" data-aos="fade-up">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">Our Projects</h1>
+      <p style="font-size: 1.2rem; color: #555;">We work holistically to transform the lives of families in Guarne and Eastern Antioquia.</p>
+    </div>
+  </section>
+
+  <section style="padding: 4rem 5%; max-width: 1100px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+      <article data-aos="fade-up" style="background: white; border-radius: 15px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-top: 5px solid var(--color-primario);">
+        <h2>Mobility & Disability</h2>
+        <p style="color: #555;">Support for people with disabilities and reduced mobility, including wheelchairs, supplies and accompaniment to medical appointments.</p>
+      </article>
+      <article data-aos="fade-up" data-aos-delay="100" style="background: white; border-radius: 15px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-top: 5px solid var(--color-secundario);">
+        <h2>Oncology Support</h2>
+        <p style="color: #555;">Transportation support, basic medical supplies, emotional support and networks for cancer patients and caregivers.</p>
+      </article>
+      <article data-aos="fade-up" data-aos-delay="200" style="background: white; border-radius: 15px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-top: 5px solid #e9c46a;">
+        <h2>Food Security</h2>
+        <p style="color: #555;">Regular delivery of groceries and essential supplies to families experiencing vulnerable economic conditions.</p>
+      </article>
+      <article data-aos="fade-up" data-aos-delay="300" style="background: white; border-radius: 15px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-top: 5px solid #4a6fa5;">
+        <h2>Community Development</h2>
+        <p style="color: #555;">Community integration activities and mutual support networks for a more inclusive Eastern Antioquia.</p>
+      </article>
+    </div>
+  </section>
+
+  <section style="padding: 5rem 5%; text-align: center; background: #1a1a1a; color: white;">
+    <h2 style="color: white; font-size: 2.5rem;">Want to be part of the change?</h2>
+    <p style="color: #aaa; max-width: 600px; margin: 1rem auto 2rem;">Your financial or volunteer support helps these projects reach the people who need them most.</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="/en/donate" style="background: var(--color-primario); color: white; padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600;">Donate Now</a>
+      <a href="/en/volunteer" style="border: 1px solid #555; color: white; padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600;">Become a Volunteer</a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Volunteer">
+  <section style="padding: 5rem 5% 3rem; text-align: center; background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);" data-aos="fade-up">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h1 style="font-size: 3.5rem;">Be Part of the Change</h1>
+      <p style="font-size: 1.2rem; color: #555;">Your time and talent are valuable ways to support our community in Guarne.</p>
+    </div>
+  </section>
+  <section style="padding: 3rem 5% 5rem; max-width: 1000px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+      <div style="text-align: center;"><span style="font-size: 2.5rem;">🛒</span><h3>Logistics & Groceries</h3><p style="color: #666;">Help organize, pack and deliver supplies.</p></div>
+      <div style="text-align: center;"><span style="font-size: 2.5rem;">❤️</span><h3>Community Support</h3><p style="color: #666;">Provide companionship to patients and families.</p></div>
+      <div style="text-align: center;"><span style="font-size: 2.5rem;">🩺</span><h3>Healthcare Professionals</h3><p style="color: #666;">Doctors, nurses, psychologists and therapists are welcome.</p></div>
+    </div>
+    <div style="background: #f8f9fa; padding: 3rem; border-radius: 15px; border-top: 5px solid var(--color-secundario);" data-aos="fade-up">
+      <h2 style="text-align: center;">Apply to Volunteer</h2>
+      <form action="https://api.web3forms.com/submit" method="POST" style="display: grid; gap: 1.2rem;">
+        <input type="hidden" name="access_key" value="7820c9c0-0ff2-4b3d-a685-d50f47d772df" />
+        <input type="hidden" name="subject" value="New volunteer application - English website" />
+        <label for="name">Full name</label><input id="name" name="name" required style="padding: 1rem; border: 1px solid #ccc; border-radius: 8px;" />
+        <label for="email">Email address</label><input id="email" name="email" type="email" required style="padding: 1rem; border: 1px solid #ccc; border-radius: 8px;" />
+        <label for="phone">Phone / WhatsApp</label><input id="phone" name="phone" type="tel" required style="padding: 1rem; border: 1px solid #ccc; border-radius: 8px;" />
+        <label for="area">How would you like to help?</label>
+        <select id="area" name="area" required style="padding: 1rem; border: 1px solid #ccc; border-radius: 8px;">
+          <option value="Logistics">Logistics and grocery delivery</option>
+          <option value="Accompaniment">Patient and family support</option>
+          <option value="Health">Healthcare professional</option>
+          <option value="Communication">Design, photography or social media</option>
+          <option value="Other">Other</option>
+        </select>
+        <label for="message">Tell us about yourself (optional)</label><textarea id="message" name="message" rows="3" style="padding: 1rem; border: 1px solid #ccc; border-radius: 8px;"></textarea>
+        <button type="submit" style="background: var(--color-secundario); color: white; padding: 1rem 2rem; border: none; border-radius: 50px; font-weight: 600;">Submit Application</button>
+      </form>
+    </div>
+  </section>
+</BaseLayout>

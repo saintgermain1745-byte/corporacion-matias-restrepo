@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Contact">
+  <section style="padding: 4rem 5%; max-width: 800px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 3rem;" data-aos="fade-up">
+      <h1 style="font-size: 3rem;">Let's Talk</h1>
+      <p style="color: #666; font-size: 1.1rem;">Have questions, want to volunteer or need support? Write to us.</p>
+    </div>
+    <form action="https://api.web3forms.com/submit" method="POST" data-aos="fade-up" style="display: flex; flex-direction: column; gap: 1.5rem; background: #f8f9fa; padding: 3rem; border-radius: 15px;">
+      <input type="hidden" name="access_key" value="7820c9c0-0ff2-4b3d-a685-d50f47d772df" />
+      <input type="hidden" name="subject" value="New website contact message - English" />
+      <label for="name" style="font-weight: 600;">Full name</label>
+      <input type="text" name="name" id="name" required style="padding: 1rem; border: 1px solid #ccc; border-radius: 8px;" />
+      <label for="email" style="font-weight: 600;">Email address</label>
+      <input type="email" name="email" id="email" required style="padding: 1rem; border: 1px solid #ccc; border-radius: 8px;" />
+      <label for="message" style="font-weight: 600;">Message</label>
+      <textarea name="message" id="message" required rows="5" style="padding: 1rem; border: 1px solid #ccc; border-radius: 8px; resize: vertical;"></textarea>
+      <button type="submit" style="background: var(--color-primario); color: white; padding: 1rem 2rem; border: none; border-radius: 50px; font-weight: 600; cursor: pointer;">Send Message</button>
+    </form>
+  </section>
+</BaseLayout>

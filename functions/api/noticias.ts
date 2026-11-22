@@ -1,6 +1,9 @@
 export const onRequestGet = async (context: any) => {
   const apiKey = context.env.GNEWS_API_KEY;
-  const url = `https://gnews.io/api/v4/top-headlines?category=health&lang=es&country=co&max=6&apikey=${apiKey}`;
+  const requestUrl = new URL(context.request.url);
+  const lang = requestUrl.searchParams.get("lang") === "en" ? "en" : "es";
+  const country = lang === "en" ? "us" : "co";
+  const url = `https://gnews.io/api/v4/top-headlines?category=health&lang=${lang}&country=${country}&max=6&apikey=${apiKey}`;
 
   try {
     const response = await fetch(url);

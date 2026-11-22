@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Health News">
+  <section style="padding: 5rem 5% 3rem; text-align: center; background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);" data-aos="fade-up">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h1 style="font-size: 3.5rem;">News and Updates</h1>
+      <p style="font-size: 1.2rem; color: #555;">Stay informed about medical, technological and social developments related to disability and cancer.</p>
+    </div>
+  </section>
+
+  <section style="padding: 3rem 5% 5rem; max-width: 1200px; margin: 0 auto;">
+    <div id="news-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 2.5rem;">
+      <p style="text-align: center; width: 100%; color: #888; font-size: 1.2rem;">Loading the latest health news...</p>
+    </div>
+  </section>
+
+  <script is:inline>
+    async function loadEnglishNews() {
+      const container = document.getElementById('news-container');
+      try {
+        const response = await fetch('/api/noticias?lang=en&country=us');
+        if (!response.ok) throw new Error('Server request failed');
+        const news = await response.json();
+        if (!Array.isArray(news) || news.length === 0) {
+          container.innerHTML = '<p style="text-align: center; width: 100%;">No new news is available right now.</p>';
+          return;
+        }
+        container.innerHTML = '';
+        news.forEach((item, index) => {
+          const date = new Date(item.fecha).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+          const image = item.imagen || 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=600&auto=format&fit=crop';
+          const article = document.createElement('article');
+          article.setAttribute('data-aos', 'fade-up');
+          article.setAttribute('data-aos-delay', String(index * 100));
+          article.style.cssText = 'background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08);';
+          article.innerHTML = `
+            <div style="height: 200px; overflow: hidden;"><img src="${image}" alt="${item.titulo}" style="width: 100%; height: 100%; object-fit: cover;" /></div>
+            <div style="padding: 1.5rem;">
+              <span style="color: var(--color-secundario); font-size: 0.85rem; font-weight: 600;">${date} | ${item.fuente}</span>
+              <h3 style="margin: 0.5rem 0 1rem;">${item.titulo}</h3>
+              <p style="color: #666;">${item.descripcion || 'Click to read the full story.'}</p>
+              <a href="${item.url}" target="_blank" rel="noopener noreferrer" style="color: var(--color-primario); font-weight: 600;">Read more &rarr;</a>
+            </div>`;
+          container.appendChild(article);
+        });
+        if (window.AOS) window.AOS.refresh();
+      } catch (error) {
+        console.error(error);
+        container.innerHTML = '<p style="text-align: center; width: 100%; color: red;">Unable to load the news. Please refresh the page.</p>';
+      }
+    }
+    document.addEventListener('astro:page-load', loadEnglishNews);
+    document.addEventListener('DOMContentLoaded', loadEnglishNews);
+  </script>
+</BaseLayout>

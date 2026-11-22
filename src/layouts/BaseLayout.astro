@@ -20,6 +20,37 @@ const routes = {
   transparency: isEn ? '/en/transparency' : '/transparencia',
   privacy: isEn ? '/en/privacy' : '/privacidad'
 };
+
+const alternateRoutes: Record<string, string> = {
+  '/': '/en/',
+  '/en/': '/',
+  '/proyectos': '/en/projects',
+  '/en/projects': '/proyectos',
+  '/noticias': '/en/news',
+  '/en/news': '/noticias',
+  '/nosotros': '/en/about',
+  '/en/about': '/nosotros',
+  '/galeria': '/en/gallery',
+  '/en/gallery': '/galeria',
+  '/contacto': '/en/contact',
+  '/en/contact': '/contacto',
+  '/voluntariado': '/en/volunteer',
+  '/en/volunteer': '/voluntariado',
+  '/donar': '/en/donate',
+  '/en/donate': '/donar',
+  '/transparencia': '/en/transparency',
+  '/en/transparency': '/transparencia',
+  '/privacidad': '/en/privacy',
+  '/en/privacy': '/privacidad'
+};
+
+const normalizedPath = currentPath.replace(/\/$/, '') || '/';
+const englishPath = alternateRoutes[normalizedPath]?.startsWith('/en/')
+  ? alternateRoutes[normalizedPath]
+  : alternateRoutes[normalizedPath] || '/en/';
+const spanishPath = alternateRoutes[normalizedPath]?.startsWith('/en/')
+  ? normalizedPath
+  : alternateRoutes[normalizedPath] || '/';
 ---
 
 <!doctype html>
@@ -193,9 +224,9 @@ const routes = {
       <!-- ACCIONES DERECHA -->
       <div class="header-actions">
         <div class="lang-selector">
-          <a href={currentPath.replace('/en', '') || '/'} style="color: #1a1a1a;">ES</a>
+          <a href={isEn ? spanishPath : normalizedPath} style="color: #1a1a1a;">ES</a>
           <span style="color: #ccc;">|</span>
-          <a href={isEn ? currentPath : `/en${currentPath}`} style="color: #888;">EN</a>
+          <a href={isEn ? normalizedPath : englishPath} style="color: #888;">EN</a>
         </div>
         <a href={routes.donate} class="btn-donar">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px; height:20px;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
@@ -214,9 +245,9 @@ const routes = {
         <a href={routes.volunteer} class={`nav-link ${currentPath === routes.volunteer ? 'active' : ''}`}>{isEn ? 'Volunteer' : 'Voluntariado'}</a>
 
         <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem; font-weight: 600; font-size: 1rem; border-bottom: 1px solid #f0f0f0;">
-          <a href={currentPath.replace('/en', '') || '/'} style="color: #1a1a1a;">ES</a>
+          <a href={isEn ? spanishPath : normalizedPath} style="color: #1a1a1a;">ES</a>
           <span style="color: #ccc;">|</span>
-          <a href={isEn ? currentPath : `/en${currentPath}`} style="color: #888;">EN</a>
+          <a href={isEn ? normalizedPath : englishPath} style="color: #888;">EN</a>
         </div>
 
         <a href={routes.donate} style="display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--color-primario); color: white; text-align: center; margin: 1rem; border-radius: 50px; padding: 1rem;">

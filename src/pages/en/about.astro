@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About Us">
+  <section style="padding: 4rem 5%; max-width: 1000px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 4rem;" data-aos="fade-up">
+      <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">Our Story</h1>
+      <p style="color: var(--color-secundario); font-size: 1.2rem; font-weight: 600;">“Excellence with a human sense”</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; align-items: center;" data-aos="fade-up">
+      <div>
+        <h2>Who we are</h2>
+        <p style="color: #555; font-size: 1.1rem;">Matías Restrepo Corporation was created to improve the lives of people in Eastern Antioquia. We work in Guarne, supporting people with disabilities and cancer patients.</p>
+        <p style="color: #555; font-size: 1.1rem;">We understand that illness and disability affect the entire family, so we provide groceries and comprehensive support to vulnerable households.</p>
+      </div>
+      <img src="/3.jpg" alt="Community in Guarne" style="width: 100%; height: auto; border-radius: 15px; box-shadow: 0 15px 30px rgba(0,0,0,0.1);" />
+    </div>
+
+    <div style="background: #f8f9fa; padding: 3rem; border-radius: 15px; margin-top: 4rem;" data-aos="fade-up">
+      <h2 style="text-align: center;">Our Areas of Action</h2>
+      <ul style="list-style: none; padding: 0; display: grid; gap: 1.5rem;">
+        <li><strong>Disability and Mobility:</strong> Comprehensive support for people with reduced mobility.</li>
+        <li><strong>Oncology Support:</strong> Accompaniment for patients and their families.</li>
+        <li><strong>Food Assistance:</strong> Groceries and essential supplies for vulnerable families.</li>
+        <li><strong>Community and Well-being:</strong> Building support networks in Guarne and Eastern Antioquia.</li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
