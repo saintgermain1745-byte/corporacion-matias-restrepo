@@ -1,5 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { officialOfficeAddress, officialWhatsAppNumber } from '../../data/contact';
+
+const whatsappMessage = 'Hello, I am writing from the Corporación Matías Restrepo website to coordinate my donation or a physical gift delivery in Guarne.';
+const whatsappUrl = `https://wa.me/${officialWhatsAppNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 ---
 
 <BaseLayout title="Contact">
@@ -8,7 +12,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <h1 style="font-size: 3rem;">Let's Talk</h1>
       <p style="color: #666; font-size: 1.1rem;">Have questions, want to volunteer or need support? Write to us.</p>
     </div>
-    <form action="https://api.web3forms.com/submit" method="POST" data-aos="fade-up" style="display: flex; flex-direction: column; gap: 1.5rem; background: #f8f9fa; padding: 3rem; border-radius: 15px;">
+    <aside data-aos="fade-up" style="margin-bottom: 2rem; padding: 1.5rem 1.75rem; border: 1px solid #e8eee8; border-radius: 15px; background: #f8fbf8;">
+      <h2 style="margin: 0 0 0.5rem; font-size: 1.2rem;">Guarne gift drop-off location</h2>
+      <address style="color: #555; font-style: normal; line-height: 1.6;">{officialOfficeAddress.en}</address>
+      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" style="display: inline-block; margin-top: 0.9rem; color: #15803d; font-weight: 700;">Message us on WhatsApp</a>
+    </aside>
+    <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" data-aos="fade-up" style="display: flex; flex-direction: column; gap: 1.5rem; background: #f8f9fa; padding: 3rem; border-radius: 15px;">
       <input type="hidden" name="access_key" value="7820c9c0-0ff2-4b3d-a685-d50f47d772df" />
       <input type="hidden" name="subject" value="New website contact message - English" />
       <label for="name" style="font-weight: 600;">Full name</label>
@@ -20,4 +29,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <button type="submit" style="background: var(--color-primario); color: white; padding: 1rem 2rem; border: none; border-radius: 50px; font-weight: 600; cursor: pointer;">Send Message</button>
     </form>
   </section>
+  <style is:global>
+    .contact-form { width: 100%; min-width: 0; }
+    .contact-form input, .contact-form textarea { width: 100%; min-width: 0; max-width: 100%; }
+    @media (max-width: 600px) {
+      .contact-form { padding: 1.25rem !important; }
+    }
+  </style>
 </BaseLayout>

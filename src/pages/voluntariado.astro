@@ -33,10 +33,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
 
     <!-- Formulario de Voluntariado -->
-    <div style="background: #f8f9fa; padding: 3rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 5px solid var(--color-secundario);" data-aos="fade-up">
+    <div class="volunteer-form-card" style="background: #f8f9fa; padding: 3rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 5px solid var(--color-secundario);" data-aos="fade-up">
       <h2 style="text-align: center; margin-bottom: 2rem;">Postúlate como Voluntario</h2>
       
-      <form action="https://api.web3forms.com/submit" method="POST" style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <form class="volunteer-form" action="https://api.web3forms.com/submit" method="POST" style="display: flex; flex-direction: column; gap: 1.5rem;">
         
         <!-- Clave de Web3Forms (La misma que usamos en contacto) -->
         <input type="hidden" name="access_key" value="7820c9c0-0ff2-4b3d-a685-d50f47d772df">
@@ -84,9 +84,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <style>
     /* En PC se ven en 2 columnas */
     .form-row-mobile { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .volunteer-form { width: 100%; min-width: 0; }
+    .volunteer-form input, .volunteer-form select, .volunteer-form textarea { width: 100%; min-width: 0; max-width: 100%; }
     /* En celular se apilan en 1 columna */
     @media (max-width: 600px) {
       .form-row-mobile { grid-template-columns: 1fr; gap: 1rem; }
+      .volunteer-form-card { padding: 1.25rem !important; }
     }
   </style>
 </BaseLayout>

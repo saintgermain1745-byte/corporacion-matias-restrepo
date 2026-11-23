@@ -1,5 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { officialOfficeAddress, officialWhatsAppNumber } from '../data/contact';
+
+const whatsappMessage = 'Hola, escribo desde la página web de la Corporación Matías Restrepo para coordinar mi donación o la entrega de un regalo en Guarne.';
+const whatsappUrl = `https://wa.me/${officialWhatsAppNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 ---
 
 <BaseLayout title="Contacto">
@@ -10,7 +14,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p style="color: #666; font-size: 1.1rem;">¿Tienes dudas, quieres ser voluntario o necesitas apoyo? Escríbenos.</p>
     </div>
 
-    <form action="https://api.web3forms.com/submit" method="POST" data-aos="fade-up" style="display: flex; flex-direction: column; gap: 1.5rem; background: #f8f9fa; padding: 3rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+    <aside data-aos="fade-up" style="margin-bottom: 2rem; padding: 1.5rem 1.75rem; border: 1px solid #e8eee8; border-radius: 15px; background: #f8fbf8;">
+      <h2 style="margin: 0 0 0.5rem; font-size: 1.2rem;">Punto de recepción en Guarne</h2>
+      <address style="color: #555; font-style: normal; line-height: 1.6;">{officialOfficeAddress.es}</address>
+      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" style="display: inline-block; margin-top: 0.9rem; color: #15803d; font-weight: 700;">Escríbenos por WhatsApp</a>
+    </aside>
+
+    <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" data-aos="fade-up" style="display: flex; flex-direction: column; gap: 1.5rem; background: #f8f9fa; padding: 3rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
       
       <!-- Clave de Web3Forms integrada -->
       <input type="hidden" name="access_key" value="7820c9c0-0ff2-4b3d-a685-d50f47d772df">
@@ -35,4 +45,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </button>
     </form>
   </section>
+  <style is:global>
+    .contact-form { width: 100%; min-width: 0; }
+    .contact-form input, .contact-form textarea { width: 100%; min-width: 0; max-width: 100%; }
+    @media (max-width: 600px) {
+      .contact-form { padding: 1.25rem !important; }
+    }
+  </style>
 </BaseLayout>

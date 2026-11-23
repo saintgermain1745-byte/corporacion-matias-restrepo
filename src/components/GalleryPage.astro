@@ -1,0 +1,233 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { galleryCategories, galleryPhotos, type GalleryCategoryId } from '../data/gallery';
+
+interface Props {
+  locale: 'es' | 'en';
+}
+
+const { locale } = Astro.props;
+const isEnglish = locale === 'en';
+const text = {
+  title: isEnglish ? 'Our Work in Pictures' : 'Nuestra Labor en Imágenes',
+  intro: isEnglish
+    ? 'Moments of hope, community and support in Guarne, Antioquia.'
+    : 'Momentos de esperanza, comunidad y apoyo en Guarne, Antioquia.',
+  all: isEnglish ? 'All' : 'Todos',
+  videos: isEnglish ? 'Our Videos' : 'Nuestros Videos',
+  photos: isEnglish ? 'photos' : 'fotos',
+  close: isEnglish ? 'Close story' : 'Cerrar historia',
+  pause: isEnglish ? 'Pause' : 'Pausar',
+  resume: isEnglish ? 'Resume' : 'Reanudar',
+  previous: isEnglish ? 'Previous photo' : 'Foto anterior',
+  next: isEnglish ? 'Next photo' : 'Foto siguiente',
+  storyProgress: isEnglish ? 'Story progress' : 'Progreso de historias',
+  storiesFor: isEnglish ? 'Stories for' : 'Historias de',
+};
+
+const categories: { id: 'all' | GalleryCategoryId; label: string; cover: string; count: number }[] = [
+  {
+    id: 'all',
+    label: text.all,
+    cover: galleryPhotos[0].src,
+    count: galleryPhotos.length,
+  },
+  ...galleryCategories.map((category) => ({
+    id: category.id,
+    label: category.label[locale],
+    cover: category.cover,
+    count: galleryPhotos.filter((photo) => photo.category === category.id).length,
+  })),
+];
+
+const categoryPhotoIndexes = new Map<GalleryCategoryId, number>();
+const categoryLabels = new Map<GalleryCategoryId, string>(
+  galleryCategories.map((category) => [category.id, category.label[locale]]),
+);
+const photoIndexes = galleryPhotos.map((photo) => {
+  const index = categoryPhotoIndexes.get(photo.category) ?? 0;
+  categoryPhotoIndexes.set(photo.category, index + 1);
+  return index;
+});
+
+const videos = ['2B2xj6OnPYo', 'mlahIPTVGMI', 'qF7tzb3yn44', 'YlL9OGE_hn4', 'lpn6Xr9MAfs', 'ZnzedLQhH7U'];
+---
+
+<BaseLayout title={isEnglish ? 'Gallery' : 'Galería'}>
+  <section class="gallery-page" data-gallery-page data-locale={locale}>
+    <header class="gallery-heading" data-aos="fade-up">
+      <h1>{text.title}</h1>
+      <p>{text.intro}</p>
+    </header>
+
+    <nav class="story-list" aria-label={isEnglish ? 'Photo stories' : 'Historias fotográficas'}>
+      {categories.map((category, index) => (
+        <button
+          type="button"
+          class:list={['story-button', index === 0 && 'is-selected']}
+          data-story-category={category.id}
+          data-story-label={category.label}
+          aria-pressed={index === 0 ? 'true' : 'false'}
+          aria-label={`${text.storiesFor} ${category.label}, ${category.count} ${text.photos}`}
+        >
+          <span class="story-ring">
+            <span class="story-inner">
+              <img src={category.cover} alt="" loading="lazy" />
+            </span>
+            <span class="story-count">{category.count}</span>
+          </span>
+          <span class="story-name">{category.label}</span>
+        </button>
+      ))}
+    </nav>
+
+    <div class="masonry-gallery" data-gallery-grid>
+      {galleryPhotos.map((photo, index) => {
+        const categoryLabel = categoryLabels.get(photo.category) ?? '';
+        const caption = photo.caption[locale];
+
+        return (
+          <article
+            class="gallery-item"
+            data-gallery-item
+            data-category={photo.category}
+            data-caption={caption}
+            data-category-label={categoryLabel}
+          >
+            <button
+              type="button"
+              class="gallery-photo"
+              data-open-story={photo.category}
+              data-photo-index={photoIndexes[index]}
+              aria-label={caption}
+            >
+              <img src={photo.src} alt={caption} loading="lazy" class="gallery-img" />
+            </button>
+          </article>
+        );
+      })}
+    </div>
+
+    <section class="gallery-videos" data-aos="fade-up">
+      <h2>{text.videos}</h2>
+      <div class="video-grid">
+        {videos.map((video) => (
+          <div class="video-frame">
+            <iframe
+              src={`https://www.youtube.com/embed/${video}`}
+              title={isEnglish ? 'Corporación Matías Restrepo video' : 'Video de la Corporación Matías Restrepo'}
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <div
+      class="stories-modal"
+      data-stories-modal
+      data-pause-label={text.pause}
+      data-resume-label={text.resume}
+      data-progress-label={text.storyProgress}
+      aria-hidden="true"
+      hidden
+    >
+      <section class="story-viewer" role="dialog" aria-modal="true" aria-label={text.title}>
+        <div class="story-progress" data-story-progress aria-label={text.storyProgress}></div>
+        <header class="story-header">
+          <p data-story-title></p>
+          <div class="story-actions">
+            <button type="button" class="story-control" data-story-pause aria-label={text.pause}>
+              <span aria-hidden="true" data-pause-icon>Ⅱ</span>
+              <span data-pause-text>{text.pause}</span>
+            </button>
+            <button type="button" class="story-close" data-story-close aria-label={text.close}>×</button>
+          </div>
+        </header>
+        <div class="story-stage">
+          <button type="button" class="story-nav story-nav-prev" data-story-step="-1" aria-label={text.previous}>
+            <span aria-hidden="true">‹</span>
+          </button>
+          <img data-story-image alt="" />
+          <button type="button" class="story-nav story-nav-next" data-story-step="1" aria-label={text.next}>
+            <span aria-hidden="true">›</span>
+          </button>
+        </div>
+        <footer class="story-caption">
+          <p data-story-caption></p>
+          <span data-story-counter></span>
+        </footer>
+      </section>
+    </div>
+  </section>
+
+  <style is:global>
+    .gallery-page { max-width: 1200px; margin: 0 auto; padding: 3rem 5% 5rem; }
+    .gallery-heading { text-align: center; margin: 0 auto 1.5rem; }
+    .gallery-heading h1 { font-size: clamp(2.2rem, 5vw, 3rem); margin: 0 0 0.6rem; }
+    .gallery-heading p { color: #666; font-size: 1.05rem; margin: 0; }
+    .story-list { display: flex; justify-content: center; gap: 1.6rem; overflow-x: auto; padding: 0.75rem 0 1.5rem; margin-bottom: 0.5rem; }
+    .story-button { display: flex; flex: 0 0 100px; flex-direction: column; align-items: center; gap: 0.55rem; padding: 0; border: 0; background: transparent; color: #333; font: inherit; cursor: pointer; }
+    .story-ring { position: relative; display: block; width: 80px; height: 80px; flex: 0 0 80px; aspect-ratio: 1 / 1; padding: 3px; border-radius: 50%; background: linear-gradient(45deg, #dc2626, #f59e0b, #16a34a); transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .story-inner { display: block; width: 100%; height: 100%; padding: 2px; overflow: hidden; border-radius: 50%; background: #fff; }
+    .story-ring img { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+    .story-button:hover .story-ring, .story-button:focus-visible .story-ring { transform: scale(1.05); box-shadow: 0 5px 16px rgba(22, 163, 74, 0.24); }
+    .story-button.is-selected .story-ring { box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.14); }
+    .story-name { display: flex; min-height: 2.2em; width: 100%; align-items: flex-start; justify-content: center; text-align: center; font-size: 0.9rem; font-weight: 600; line-height: 1.1; }
+    .story-count { position: absolute; right: -0.2rem; bottom: 0.05rem; padding: 0.12rem 0.38rem; border: 2px solid #f8f9fa; border-radius: 999px; background: #fff; color: #555; font-size: 0.68rem; font-weight: 600; line-height: 1.2; }
+    .masonry-gallery { column-count: 1; column-gap: 1.25rem; }
+    @media (min-width: 600px) { .masonry-gallery { column-count: 2; } }
+    @media (min-width: 900px) { .masonry-gallery { column-count: 3; } }
+    @media (min-width: 1200px) { .masonry-gallery { column-count: 4; } }
+    .gallery-item { display: inline-block; width: 100%; margin: 0 0 1.25rem; break-inside: avoid; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+    .gallery-item[hidden] { display: none !important; }
+    .gallery-photo { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; }
+    .gallery-img { display: block; width: 100%; transition: transform 0.4s ease; }
+    .gallery-photo:hover .gallery-img { transform: scale(1.04); }
+    .gallery-videos { margin-top: 4rem; }
+    .gallery-videos h2 { margin: 0 0 2rem; text-align: center; font-size: 2.2rem; }
+    .video-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
+    .video-frame { width: min(100%, 280px); aspect-ratio: 9 / 16; overflow: hidden; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .video-frame iframe { width: 100%; height: 100%; border: 0; }
+    .stories-modal { position: fixed; z-index: 10010; inset: 0; display: flex; align-items: center; justify-content: center; padding: 1rem; background: rgba(15, 17, 18, 0.92); }
+    .stories-modal[hidden] { display: none !important; }
+    .story-viewer { display: flex; position: relative; width: min(440px, 100%); height: min(850px, 92dvh); min-height: 400px; flex-direction: column; overflow: hidden; border-radius: 18px; background: #101112; color: #fff; box-shadow: 0 20px 70px rgba(0,0,0,0.35); }
+    .story-progress { display: flex; gap: 4px; padding: 12px 12px 0; }
+    .story-progress-segment { height: 6px; flex: 1; overflow: hidden; border-radius: 999px; background: rgba(255, 255, 255, 0.28); }
+    .story-progress-fill { display: block; width: 0; height: 100%; flex: 0 0 auto; border-radius: inherit; background: linear-gradient(90deg, #dc2626 0%, #16a34a 100%); box-shadow: 0 0 8px rgba(22, 163, 74, 0.55); }
+    .story-header { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.8rem 1rem; }
+    .story-header p { margin: 0; color: #fff; font-size: 0.9rem; font-weight: 600; }
+    .story-actions { display: flex; align-items: center; gap: 0.6rem; }
+    .story-control, .story-close { display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; border: 0; background: transparent; color: white; font: inherit; cursor: pointer; }
+    .story-control { font-size: 0.8rem; }
+    .story-close { width: 32px; height: 32px; font-size: 1.8rem; line-height: 1; }
+    .story-stage { position: relative; display: flex; min-height: 0; flex: 1; align-items: center; justify-content: center; background: #050505; }
+    .story-stage > img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+    .story-nav { position: absolute; z-index: 1; top: 0; bottom: 0; display: flex; width: 22%; align-items: center; border: 0; background: transparent; color: #fff; cursor: pointer; opacity: 0.75; }
+    .story-nav:hover { opacity: 1; }
+    .story-nav span { font-size: 3rem; text-shadow: 0 1px 5px #000; }
+    .story-nav-prev { left: 0; justify-content: flex-start; padding-left: 0.8rem; }
+    .story-nav-next { right: 0; justify-content: flex-end; padding-right: 0.8rem; }
+    .story-caption { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; padding: 1rem 1.1rem 1.2rem; }
+    .story-caption p { margin: 0; color: #f3f3f3; font-size: 0.95rem; line-height: 1.45; }
+    .story-caption span { flex: 0 0 auto; color: #aaa; font-size: 0.8rem; }
+    @media (max-width: 600px) {
+      .gallery-page { padding-top: 2rem; }
+      .story-list { justify-content: flex-start; gap: 1.2rem; }
+      .stories-modal { padding: 0; }
+      .story-viewer { width: 100%; height: 100dvh; min-height: 0; border-radius: 0; }
+    }
+    @media (min-width: 768px) {
+      .story-ring { width: 96px; height: 96px; flex-basis: 96px; }
+      .story-button { flex-basis: 112px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .story-ring, .gallery-img { transition: none; }
+    }
+  </style>
+</BaseLayout>
+
+<script>
+  import '../scripts/gallery-interactions.js';
+</script>

@@ -15,9 +15,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div style="text-align: center;"><span style="font-size: 2.5rem;">❤️</span><h3>Community Support</h3><p style="color: #666;">Provide companionship to patients and families.</p></div>
       <div style="text-align: center;"><span style="font-size: 2.5rem;">🩺</span><h3>Healthcare Professionals</h3><p style="color: #666;">Doctors, nurses, psychologists and therapists are welcome.</p></div>
     </div>
-    <div style="background: #f8f9fa; padding: 3rem; border-radius: 15px; border-top: 5px solid var(--color-secundario);" data-aos="fade-up">
+    <div class="volunteer-form-card" style="background: #f8f9fa; padding: 3rem; border-radius: 15px; border-top: 5px solid var(--color-secundario);" data-aos="fade-up">
       <h2 style="text-align: center;">Apply to Volunteer</h2>
-      <form action="https://api.web3forms.com/submit" method="POST" style="display: grid; gap: 1.2rem;">
+      <form class="volunteer-form" action="https://api.web3forms.com/submit" method="POST" style="display: grid; gap: 1.2rem;">
         <input type="hidden" name="access_key" value="7820c9c0-0ff2-4b3d-a685-d50f47d772df" />
         <input type="hidden" name="subject" value="New volunteer application - English website" />
         <label for="name">Full name</label><input id="name" name="name" required style="padding: 1rem; border: 1px solid #ccc; border-radius: 8px;" />
@@ -36,4 +36,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </form>
     </div>
   </section>
+  <style>
+    .volunteer-form { width: 100%; min-width: 0; }
+    .volunteer-form input, .volunteer-form select, .volunteer-form textarea { width: 100%; min-width: 0; max-width: 100%; }
+    @media (max-width: 600px) {
+      .volunteer-form-card { padding: 1.25rem !important; }
+    }
+  </style>
 </BaseLayout>

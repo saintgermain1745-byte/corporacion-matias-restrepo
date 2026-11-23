@@ -104,8 +104,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <!-- Bloque de Transparencia y Confianza -->
   <section style="padding: 2rem 5%; max-width: 900px; margin: 0 auto;" data-aos="fade-up">
-    <div style="background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); border: 1px solid #eaeaea; border-radius: 15px; padding: 2rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; box-shadow: 0 5px 20px rgba(0,0,0,0.03);">
-      <div style="flex: 1; min-width: 250px;">
+    <div class="donation-trust-card" style="background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); border: 1px solid #eaeaea; border-radius: 15px; padding: 2rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; box-shadow: 0 5px 20px rgba(0,0,0,0.03);">
+      <div class="donation-trust-copy" style="flex: 1; min-width: 250px;">
         <h3 style="margin-top: 0; font-size: 1.3rem; color: #1a1a1a; display: flex; align-items: center; gap: 10px;">
           <span style="font-size: 1.5rem;">🛡️</span> Transparencia y Confianza
         </h3>
@@ -114,7 +114,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </p>
       </div>
       <div>
-        <a href="/transparencia" style="background: white; color: #1a1a1a; border: 2px solid #1a1a1a; padding: 0.8rem 1.5rem; border-radius: 50px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s; white-space: nowrap;" onmouseover="this.style.background='#1a1a1a'; this.style.color='white'" onmouseout="this.style.background='white'; this.style.color='#1a1a1a'">
+        <a class="donation-trust-link" href="/transparencia" style="background: white; color: #1a1a1a; border: 2px solid #1a1a1a; padding: 0.8rem 1.5rem; border-radius: 50px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s; white-space: nowrap;" onmouseover="this.style.background='#1a1a1a'; this.style.color='white'" onmouseout="this.style.background='white'; this.style.color='#1a1a1a'">
           Ver nuestro portal de transparencia
         </a>
       </div>
@@ -135,6 +135,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 
   <style is:global>
+    @media (max-width: 600px) {
+      .donation-trust-card { flex-direction: column !important; align-items: stretch !important; padding: 1.25rem !important; }
+      .donation-trust-copy { min-width: 0 !important; }
+      .donation-trust-link { width: 100%; padding: 0.8rem 1rem !important; text-align: center; white-space: normal !important; }
+    }
+
     .tarjeta-donacion {
       transition: all 0.3s ease !important;
     }

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ChristmasCampaign from '../components/ChristmasCampaign.astro';
 ---
 
 <BaseLayout title="Inicio">
@@ -23,6 +24,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </div>
   </section>
+
+  <ChristmasCampaign locale="es" />
 
   <!-- Sección de Pilares -->
   <section id="conocer" style="padding: 5rem 5%; max-width: 1200px; margin: 0 auto;">
@@ -56,20 +59,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <h2 style="font-size: 2rem; margin-bottom: 1rem;">Empresas que nos apoyan</h2>
     <p style="color: #666; margin-bottom: 3rem;">Gracias a su confianza, podemos seguir transformando vidas en Guarne.</p>
 
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4rem; max-width: 1000px; margin: 0 auto;">
+    <div class="allies-grid">
       
       <!-- Clickshopping -->
-      <img src="/aliados/Clickshopping.png" alt="Clickshopping" style="height: 60px; max-width: 150px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'" />
+      <div class="ally-logo">
+        <img src="/aliados/Clickshopping.png" alt="Clickshopping" />
+      </div>
       
       <!-- CrytoAgro -->
-      <img src="/aliados/CrytoAgro.png" alt="CrytoAgro" style="height: 60px; max-width: 150px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'" />
-
-      <!-- Isotipo (C roja) -->
-      <img src="/aliados/Isotipo.png" alt="Isotipo" style="height: 60px; max-width: 150px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'" />
+      <div class="ally-logo">
+        <img src="/aliados/full-logo.svg" alt="CrytoAgro" />
+      </div>
 
       <!-- Ultrasystem -->
-      <img src="/aliados/Ultrasystem.png" alt="Ultrasystem Technology" style="height: 60px; max-width: 150px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'" />
-      
+      <a class="ally-logo" href="https://ultrasystem.shop/#inicio" target="_blank" rel="noopener noreferrer" aria-label="Visitar Ultrasystem">
+        <img src="/aliados/logo-ultrasystem.svg" alt="Ultrasystem Technology" />
+      </a>
+
+      <!-- Isotipo (C roja) -->
+      <div class="ally-logo">
+        <img src="/aliados/Isotipo.png" alt="Isotipo" />
+      </div>
+
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  import '../scripts/allies-animation.js';
+</script>

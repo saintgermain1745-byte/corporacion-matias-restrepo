@@ -1,4 +1,6 @@
 ---
+import { officialOfficeAddress } from '../data/contact';
+
 export interface Props {
   title: string;
 }
@@ -8,6 +10,7 @@ const currentPath = Astro.url.pathname;
 
 // --- LÓGICA DEL MENÚ INTELIGENTE ---
 const isEn = currentPath.startsWith('/en');
+const footerAddress = isEn ? officialOfficeAddress.en : officialOfficeAddress.es;
 const routes = {
   home: isEn ? '/en/' : '/',
   projects: isEn ? '/en/projects' : '/proyectos',
@@ -20,6 +23,9 @@ const routes = {
   transparency: isEn ? '/en/transparency' : '/transparencia',
   privacy: isEn ? '/en/privacy' : '/privacidad'
 };
+const campaignHref = currentPath === routes.home
+  ? '#campana-navidad'
+  : `${routes.home}#campana-navidad`;
 
 const alternateRoutes: Record<string, string> = {
   '/': '/en/',
@@ -78,6 +84,7 @@ const spanishPath = alternateRoutes[normalizedPath]?.startsWith('/en/')
         --color-secundario: #2a9d8f;
         --color-texto: #2b2b2b;
         --color-fondo: #ffffff;
+        --campaign-announcement-height: 38px;
         --fuente-titulos: 'Playfair Display', serif;
         --fuente-cuerpo: 'Inter', sans-serif;
       }
@@ -85,11 +92,48 @@ const spanishPath = alternateRoutes[normalizedPath]?.startsWith('/en/')
       body { font-family: var(--fuente-cuerpo); color: var(--color-texto); background-color: var(--color-fondo); line-height: 1.6; -webkit-font-smoothing: antialiased; }
       h1, h2, h3 { font-family: var(--fuente-titulos); font-weight: 600; color: #1a1a1a; }
       a { text-decoration: none; color: inherit; }
+
+      .campaign-announcement {
+        position: fixed;
+        z-index: 10001;
+        top: 0;
+        left: 0;
+        display: flex;
+        width: 100%;
+        height: var(--campaign-announcement-height);
+        align-items: center;
+        justify-content: center;
+        padding: 0 3rem;
+        background: linear-gradient(100deg, #b91c1c, #15803d);
+        color: #fff;
+        text-align: center;
+      }
+      .campaign-announcement[hidden] { display: none; }
+      .campaign-announcement-link { color: #fff; font-size: 0.82rem; font-weight: 600; line-height: 1.25; }
+      .campaign-announcement-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+      .campaign-announcement-close {
+        position: absolute;
+        top: 50%;
+        right: 0.55rem;
+        display: grid;
+        width: 28px;
+        height: 28px;
+        place-items: center;
+        transform: translateY(-50%);
+        border: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+        font-size: 1.15rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .campaign-announcement-close:hover { background: rgba(255, 255, 255, 0.28); }
       
       /* --- HEADER FIJO Y BLINDADO (SIN SALTOS) --- */
       .main-header {
         position: fixed; /* Fijo en la parte superior */
-        top: 0;
+        top: var(--campaign-announcement-height);
         left: 0;
         width: 100%;
         z-index: 9999;
@@ -103,10 +147,15 @@ const spanishPath = alternateRoutes[normalizedPath]?.startsWith('/en/')
       
       /* Como el header es fixed, empujamos el contenido hacia abajo para que no quede oculto */
       main {
-        padding-top: 110px; 
+        padding-top: calc(110px + var(--campaign-announcement-height));
       }
       @media (max-width: 1024px) {
-        main { padding-top: 90px; } /* Menos espacio en móvil */
+        main { padding-top: calc(90px + var(--campaign-announcement-height)); } /* Menos espacio en móvil */
+      }
+      @media (max-width: 760px) {
+        :root { --campaign-announcement-height: 58px; }
+        .campaign-announcement { padding: 0 2.6rem 0 0.6rem; }
+        .campaign-announcement-link { font-size: 0.72rem; }
       }
       
       /* BLINDAJE DEL LOGO */
@@ -125,7 +174,7 @@ const spanishPath = alternateRoutes[normalizedPath]?.startsWith('/en/')
         font-weight: 600;
         color: #1a1a1a;
         margin-left: 10px;
-        white-space: nowrap; 
+        white-space: nowrap;
       }
 
       .logo-text-en { font-size: 1.1rem !important; }
@@ -143,15 +192,23 @@ const spanishPath = alternateRoutes[normalizedPath]?.startsWith('/en/')
       .btn-donar { display: flex; align-items: center; gap: 6px; background: var(--color-primario); color: white; padding: 0.6rem 1.5rem; border-radius: 50px; font-weight: 600; transition: transform 0.2s; white-space: nowrap; }
       
       /* --- MENÚ MÓVIL --- */
-      .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 6px; }
-      .hamburger span { display: block; width: 30px; height: 3px; background: #1a1a1a; transition: 0.3s; }
-      .mobile-nav { display: none; flex-direction: column; width: 100%; background: white; border-top: 1px solid #eaeaea; position: absolute; top: 100%; left: 0; z-index: 99; box-shadow: 0 10px 15px rgba(0,0,0,0.05); }
+      .hamburger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; padding: 0; border: 0; background: none; color: #1a1a1a; cursor: pointer; }
+      .hamburger svg { display: block; width: 32px; height: 32px; overflow: visible; }
+      .hamburger path { fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+      .mobile-nav { display: none; flex-direction: column; width: 100%; max-height: calc(100dvh - var(--campaign-announcement-height) - 90px); overflow-y: auto; overscroll-behavior: contain; background: white; border-top: 1px solid #eaeaea; position: absolute; top: 100%; left: 0; z-index: 99; box-shadow: 0 10px 15px rgba(0,0,0,0.05); }
       .mobile-nav.active { display: flex; }
-      .mobile-nav .nav-link { padding: 1rem; border-bottom: 1px solid #f0f0f0; border-radius: 0; font-size: 1.1rem; }
+      .mobile-nav .nav-link { min-height: 46px; padding: 0.72rem 1rem; border-bottom: 1px solid #f0f0f0; border-radius: 0; font-size: 1rem; }
+      body.mobile-menu-open #accessibility-btn,
+      body.mobile-menu-open #accessibility-panel { display: none !important; }
+      body.mobile-menu-open .floatingchat-container-wrap,
+      body.mobile-menu-open .floatingchat-container-wrap-mobi,
+      body.mobile-menu-open .floatingchat-container,
+      body.mobile-menu-open .floatingchat-container-mobi { display: none !important; }
       
       @media (max-width: 1024px) {
         .main-header { flex-direction: column; align-items: flex-start; padding: 1rem 5%; position: fixed; }
-        .header-top { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+        .header-top { width: 100%; min-width: 0; display: flex; justify-content: space-between; align-items: center; }
+        .header-logo { min-width: 0; }
         .desktop-nav, .header-actions { display: none; }
         .hamburger { display: flex; }
         .main-header .logo-text { font-size: 1.1rem; }
@@ -160,16 +217,67 @@ const spanishPath = alternateRoutes[normalizedPath]?.startsWith('/en/')
         .floatingchat-container-wrap, .floatingchat-container-wrap-mobi { transform: scale(0.85); transform-origin: bottom left; }
       }
 
+      @media (max-width: 600px) {
+        .main-header { padding: 0.75rem 5%; }
+        .header-top { gap: 0.6rem; }
+        .header-logo { max-width: calc(100% - 3.25rem); }
+        .main-header .logo-img { width: 44px !important; max-width: 44px !important; }
+        .main-header .logo-text { min-width: 0; margin-left: 0.5rem; font-size: clamp(0.8rem, 3.7vw, 0.95rem); line-height: 1.15; white-space: normal; }
+        .main-header .logo-text-en { font-size: clamp(0.78rem, 3.4vw, 0.9rem) !important; }
+        .hamburger { flex: 0 0 42px; width: 42px; height: 42px; }
+      }
+
       /* --- ACCESIBILIDAD --- */
       body.high-contrast { background-color: #000 !important; color: #fff !important; }
       body.high-contrast main, body.high-contrast footer, body.high-contrast header, body.high-contrast section, body.high-contrast div, body.high-contrast h1, body.high-contrast h2, body.high-contrast h3, body.high-contrast p, body.high-contrast a, body.high-contrast span, body.high-contrast li { background-color: #000 !important; color: #ffeb3b !important; }
       body.high-contrast img { filter: grayscale(100%) contrast(120%); }
       body.high-contrast button, body.high-contrast a[style*="background"] { background-color: #ffeb3b !important; color: #000 !important; border: 2px solid #fff !important; }
       #accessibility-panel h3 { font-family: var(--fuente-cuerpo) !important; font-size: 1rem !important; font-weight: 600 !important; margin-bottom: 1rem !important; color: #1a1a1a !important; }
+      .footer-bottom { margin-top: 1.5rem; border-top: 1px solid #333; padding-top: 1.25rem; width: 100%; font-size: 0.8rem; color: #666; display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-align: left; }
+      .footer-copyright { display: flex; flex-direction: column; gap: 0.35rem; }
+      .footer-powered { display: flex; align-items: center; gap: 0.6rem; color: #a0a0a0; white-space: nowrap; }
+      .footer-powered img { display: block; height: 35px; width: auto; filter: brightness(2.1); transition: transform 0.2s ease; }
+      .footer-powered:hover img { transform: scale(1.05); }
+      .footer-address { max-width: 580px; color: #a0a0a0; font-size: 0.85rem; font-style: normal; line-height: 1.55; }
+      .footer-address strong { display: block; margin-bottom: 0.25rem; color: #dedede; }
+      .allies-grid { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: center; gap: clamp(0.35rem, 2vw, 1.25rem); max-width: 1000px; margin: 0 auto; padding: 14px 12px; }
+      .ally-logo { position: relative; z-index: 1; display: flex; width: 100%; height: 82px; align-items: center; justify-content: center; border: 1px solid rgba(43, 43, 43, 0.045); border-radius: 17px; background: rgba(255, 255, 255, 0.72); box-shadow: 0 5px 18px rgba(43, 43, 43, 0.035); }
+      .ally-logo img { display: block; max-width: calc(100% - 1rem); max-height: 58px; width: auto; height: auto; object-fit: contain; filter: grayscale(100%); opacity: 0.62; transition: filter 0.35s ease, opacity 0.35s ease, transform 0.35s ease; }
+      .ally-logo:hover img, .ally-logo.is-active img { filter: grayscale(0%); opacity: 1; }
+      .ally-logo:focus-visible { outline: 2px solid var(--color-primario); outline-offset: 3px; border-radius: 17px; }
+      .allies-flow { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+      .allies-flow-path { fill: none; stroke: url(#allies-flow-gradient); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; opacity: 0.8; filter: drop-shadow(0 0 3px rgba(22, 163, 74, 0.25)); }
+      .allies-flow-pulse { fill: #dc2626; stroke: white; stroke-width: 2; filter: drop-shadow(0 1px 5px rgba(220, 38, 38, 0.4)); }
+      @media (prefers-reduced-motion: reduce) {
+        .ally-logo img { transition: none; }
+      }
+      @media (max-width: 600px) {
+        .footer-bottom { flex-direction: column; text-align: center; }
+        .footer-powered { justify-content: center; }
+      }
+      @media (max-width: 700px) {
+        .allies-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+        .allies-grid > * { justify-self: center; }
+        .ally-logo { width: min(150px, 100%); }
+      }
     </style>
   </head>
   
   <body>
+    <div class="campaign-announcement" data-campaign-announcement>
+      <a class="campaign-announcement-link" href={campaignHref}>
+        {isEn
+          ? '🎄 Christmas Toy & Gift Drive: Accepting donations until Dec 18 · Join now →'
+          : '🎄 Recolección Navideña: Recibimos regalos hasta el 18 de diciembre · Súmate aquí →'}
+      </a>
+      <button
+        class="campaign-announcement-close"
+        type="button"
+        data-campaign-announcement-close
+        aria-label={isEn ? 'Hide campaign announcement' : 'Ocultar anuncio de campaña'}
+      >×</button>
+    </div>
+
     <header class="main-header">
       
       <!-- LOGO -->
@@ -184,8 +292,21 @@ const spanishPath = alternateRoutes[normalizedPath]?.startsWith('/en/')
             )}
           </span>
         </a>
-        <button class="hamburger" id="mobile-menu-btn" aria-label="Open menu">
-          <span></span><span></span><span></span>
+        <button
+          class="hamburger"
+          id="mobile-menu-btn"
+          type="button"
+          aria-label={isEn ? 'Open menu' : 'Abrir menú'}
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          data-open-label={isEn ? 'Open menu' : 'Abrir menú'}
+          data-close-label={isEn ? 'Close menu' : 'Cerrar menú'}
+        >
+          <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <path data-menu-stroke="left-upper" stroke="#1a1a1a" d="M4 8 C7 8 11 8 15 8 C19 8 23 8 28 8 C28 8 28 8 28 8" />
+            <path data-menu-stroke="right" stroke="#1a1a1a" d="M4 16 C7 16 11 16 15 16 C19 16 23 16 28 16 C28 16 28 16 28 16" />
+            <path data-menu-stroke="left-lower" stroke="#1a1a1a" d="M4 24 C7 24 11 24 15 24 C19 24 23 24 28 24 C28 24 28 24 28 24" />
+          </svg>
         </button>
       </div>
       
@@ -235,7 +356,7 @@ const spanishPath = alternateRoutes[normalizedPath]?.startsWith('/en/')
       </div>
 
       <!-- MENÚ MÓVIL -->
-      <nav class="mobile-nav" id="mobile-menu">
+      <nav class="mobile-nav" id="mobile-menu" aria-hidden="true">
         <a href={routes.home} class={`nav-link ${currentPath === routes.home ? 'active' : ''}`}>{isEn ? 'Home' : 'Inicio'}</a>
         <a href={routes.projects} class={`nav-link ${currentPath === routes.projects ? 'active' : ''}`}>{isEn ? 'Projects' : 'Proyectos'}</a>
         <a href={routes.news} class={`nav-link ${currentPath === routes.news ? 'active' : ''}`}>{isEn ? 'News' : 'Noticias'}</a>
@@ -280,15 +401,26 @@ const spanishPath = alternateRoutes[normalizedPath]?.startsWith('/en/')
         <a href="https://mail.google.com/mail/?view=cm&fs=1&to=corporacionmatiasrestrepo@gmail.com" target="_blank" rel="noopener noreferrer" style="color: #a0a0a0; font-size: 0.9rem; text-decoration: none; margin-top: 0.5rem; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#a0a0a0'">
           corporacionmatiasrestrepo@gmail.com
         </a>
+        <address class="footer-address">
+          <strong>{isEn ? 'Guarne office and gift drop-off address' : 'Dirección de oficina y recepción de regalos en Guarne'}</strong>
+          {footerAddress}
+        </address>
 
         <div style="display: flex; gap: 1.5rem; font-size: 0.85rem; margin-top: 1rem; flex-wrap: wrap; justify-content: center;">
           <a href={routes.transparency} style="color: #a0a0a0; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#a0a0a0'">{isEn ? 'Transparency' : 'Transparencia'}</a>
           <a href={routes.privacy} style="color: #a0a0a0; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#a0a0a0'">{isEn ? 'Privacy Policy' : 'Política de Privacidad'}</a>
         </div>
-
-        <div style="margin-top: 2rem; border-top: 1px solid #333; padding-top: 2rem; width: 100%; font-size: 0.8rem; color: #666; display: flex; flex-direction: column; gap: 0.5rem;">
-          <p style="margin: 0;">&copy; 2025 - {new Date().getFullYear()} {isEn ? 'Matías Restrepo Corporation' : 'Corporación Matías Restrepo'}. {isEn ? 'All rights reserved.' : 'Todos los derechos reservados.'}</p>
-          <p style="margin: 0; font-size: 0.75rem; color: #555;">{isEn ? 'Non-profit foundation established in Guarne, Antioquia since 2025.' : 'Fundación sin ánimo de lucro constituida en Guarne, Antioquia desde 2025.'}</p>
+        <div class="footer-bottom">
+          <div class="footer-copyright">
+            <p style="margin: 0;">&copy; 2025 - {new Date().getFullYear()} {isEn ? 'Matías Restrepo Corporation' : 'Corporación Matías Restrepo'}. {isEn ? 'All rights reserved.' : 'Todos los derechos reservados.'}</p>
+            <p style="margin: 0; font-size: 0.75rem; color: #777;">{isEn ? 'Non-profit foundation established in Guarne, Antioquia since 2025.' : 'Fundación sin ánimo de lucro constituida en Guarne, Antioquia desde 2025.'}</p>
+          </div>
+          <div class="footer-powered">
+            <span>{isEn ? 'Powered by' : 'Impulsado por'}</span>
+            <a href="https://ultrasystem.shop/desarrollo/" target="_blank" rel="noopener noreferrer" aria-label={isEn ? 'Visit Ultrasystem' : 'Visitar Ultrasystem'}>
+              <img src="/aliados/logo-ultrasystem.svg" alt="Ultrasystem Technology" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
@@ -350,33 +482,12 @@ const spanishPath = alternateRoutes[normalizedPath]?.startsWith('/en/')
         });
       }
 
-      // Solo queda el menú móvil, el efecto de scroll ha sido eliminado para siempre
-      function initMobileMenu() {
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        if (menuBtn && mobileMenu) {
-          const newMenuBtn = menuBtn.cloneNode(true);
-          menuBtn.parentNode.replaceChild(newMenuBtn, menuBtn);
-          newMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-          });
-          const links = mobileMenu.querySelectorAll('a');
-          links.forEach(link => {
-            link.addEventListener('click', () => {
-              mobileMenu.classList.remove('active');
-            });
-          });
-        }
-      }
-
       document.addEventListener('astro:page-load', () => {
         loadAccessibilitySettings();
-        initMobileMenu();
       });
 
       document.addEventListener('DOMContentLoaded', () => {
         loadAccessibilitySettings();
-        initMobileMenu();
       });
     </script> 
     
@@ -385,7 +496,7 @@ const spanishPath = alternateRoutes[normalizedPath]?.startsWith('/en/')
     <script is:inline>
       kofiWidgetOverlay.draw('corporacionmatiasrestrepo', {
         'type': 'floating-chat',
-        'floating-chat.donateButton.text': isEn ? 'Support us' : 'Apóyanos',
+        'floating-chat.donateButton.text': document.documentElement.lang === 'en' ? 'Support us' : 'Apóyanos',
         'floating-chat.donateButton.background-color': '#c1121f',
         'floating-chat.donateButton.text-color': '#fff',
         'floating-chat.donateButton.position': 'right'
@@ -396,6 +507,12 @@ const spanishPath = alternateRoutes[normalizedPath]?.startsWith('/en/')
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" is:inline></script>
     <script is:inline>
       AOS.init({ duration: 800, once: true, offset: 100 });
+    </script>
+    <script>
+      import '../scripts/mobile-menu.js';
+    </script>
+    <script>
+      import '../scripts/christmas-campaign.js';
     </script>
   </body>
 </html>

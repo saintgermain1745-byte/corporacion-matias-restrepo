@@ -1,0 +1,541 @@
+---
+import { officialOfficeAddress, officialWhatsAppNumber } from '../data/contact';
+
+interface Props {
+  locale: 'es' | 'en';
+}
+
+const { locale } = Astro.props;
+const isEnglish = locale === 'en';
+const physicalGiftMessage = isEnglish
+  ? 'Hello, I am writing from the Corporación Matías Restrepo website to coordinate my donation or a physical gift delivery in Guarne.'
+  : 'Hola, escribo desde la página web de la Corporación Matías Restrepo para coordinar mi donación o la entrega de un regalo físico en Guarne.';
+const text = {
+  title: isEnglish
+    ? 'This Christmas, let’s bring smiles to the children of Guarne!'
+    : '¡Esta Navidad regalemos sonrisas a los niños de Guarne!',
+  dates: isEnglish
+    ? 'Accepting donations until December 18 · Delivery: December 20'
+    : 'Recibimos aportes hasta el 18 de diciembre · Entrega: 20 de diciembre',
+  donationTitle: isEnglish ? 'What can you donate?' : '¿Qué puedes donar?',
+  gifts: isEnglish
+    ? ['New toys', 'Sports equipment', 'Personal care items']
+    : ['Juguetes nuevos', 'Implementos deportivos', 'Elementos de aseo personal'],
+  donateMoney: isEnglish ? 'Donate money' : 'Donar aporte económico',
+  donateGift: isEnglish ? 'Donate a physical gift (WhatsApp)' : 'Donar regalo físico (WhatsApp)',
+  addressLabel: isEnglish ? 'Gift drop-off location' : 'Punto de recepción de regalos',
+  solidarityStart: isEnglish ? 'Purchases at' : 'Quienes compren en',
+  solidarityEnd: isEnglish
+    ? 'using the code shown generate a direct contribution of $3,720 COP for the children of Corporación Matías Restrepo in Guarne.'
+    : 'usando el código indicado generan un aporte directo de $3.720 COP para los niños de la Corporación Matías Restrepo en Guarne.',
+  copyCode: isEnglish ? 'Copy' : 'Copiar',
+  copiedCode: isEnglish ? '✓ Copied' : '✓ Copiado',
+  copyCodeError: isEnglish ? 'Could not copy' : 'No se pudo copiar',
+  videoLabel: isEnglish ? 'Christmas campaign video' : 'Video de la campaña navideña',
+  posterLabel: isEnglish ? 'Christmas campaign poster' : 'Afiche de la campaña navideña',
+  showPoster: isEnglish ? 'View poster' : 'Ver afiche',
+  showVideo: isEnglish ? 'Watch video' : 'Ver video',
+  modalTitle: isEnglish ? 'Christmas 2026: let’s bring smiles to Guarne' : 'Navidad 2026: regalemos sonrisas en Guarne',
+  modalJoin: isEnglish ? 'I want to help' : 'Quiero sumarme',
+  modalClose: isEnglish ? 'Close campaign announcement' : 'Cerrar anuncio de campaña',
+};
+
+const whatsappUrl = `https://wa.me/${officialWhatsAppNumber}?text=${encodeURIComponent(physicalGiftMessage)}`;
+---
+
+<section class="christmas-campaign" id="campana-navidad" aria-labelledby="christmas-campaign-title">
+  <div class="campaign-content">
+    <div class="campaign-media-column">
+      <div class="campaign-media-frame">
+        <video
+          class="campaign-video"
+          data-campaign-video
+          controls
+          autoplay
+          muted
+          playsinline
+          preload="auto"
+          aria-label={text.videoLabel}
+        >
+          <source src="/videos/navidad.mp4" type="video/mp4" />
+        </video>
+        <img
+          class="campaign-poster"
+          data-campaign-poster
+          src="/Afiche.jpg"
+          alt={text.posterLabel}
+          hidden
+        />
+      </div>
+      <button
+        class="campaign-media-toggle"
+        type="button"
+        data-campaign-media-toggle
+        data-show-poster={text.showPoster}
+        data-show-video={text.showVideo}
+      >
+        {text.showPoster}
+      </button>
+    </div>
+
+    <div class="campaign-copy">
+      <p class="campaign-eyebrow">{isEnglish ? 'Christmas 2026' : 'Navidad 2026'}</p>
+      <h2 id="christmas-campaign-title">{text.title}</h2>
+      <p class="campaign-dates">{text.dates}</p>
+
+      <h3>{text.donationTitle}</h3>
+      <ul class="campaign-gifts">
+        {text.gifts.map((gift) => <li>{gift}</li>)}
+      </ul>
+
+      <div class="campaign-actions">
+        <a class="campaign-donate-money" href={isEnglish ? '/en/donate' : '/donar'}>
+          {text.donateMoney}
+        </a>
+        <a class="campaign-donate-gift" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+          {text.donateGift}
+        </a>
+      </div>
+      <div class="campaign-gift-details">
+        <p class="campaign-address">
+          <strong>{text.addressLabel}</strong>
+          <span>{isEnglish ? officialOfficeAddress.en : officialOfficeAddress.es}</span>
+        </p>
+        <div class="campaign-solidarity">
+          <p>
+            {text.solidarityStart}{' '}
+            <a href="https://ultrasystem.shop" target="_blank" rel="noopener noreferrer">ultrasystem.shop</a>{' '}
+            {text.solidarityEnd}
+          </p>
+          <div class="campaign-coupon">
+            <code>MATIAS2026</code>
+            <button
+              class="campaign-copy-code"
+              type="button"
+              data-copy-campaign-code
+              data-copy-label={text.copyCode}
+              data-copied-label={text.copiedCode}
+              data-copy-error-label={text.copyCodeError}
+              aria-label={text.copyCode}
+            >
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+                <path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"></path>
+              </svg>
+              <span data-copy-campaign-label>{text.copyCode}</span>
+            </button>
+          </div>
+          <span class="campaign-copy-status" data-copy-campaign-status aria-live="polite"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="campaign-welcome" data-campaign-modal aria-hidden="true" hidden>
+  <section class="campaign-welcome-dialog" role="dialog" aria-modal="true" aria-labelledby="campaign-modal-title">
+    <button
+      class="campaign-modal-close"
+      type="button"
+      data-campaign-close
+      aria-label={text.modalClose}
+    >×</button>
+    <h2 id="campaign-modal-title">{text.modalTitle}</h2>
+    <img class="campaign-modal-poster" src="/Afiche.jpg" alt={text.posterLabel} />
+    <a class="campaign-modal-join" href="#campana-navidad" data-campaign-join>
+      {text.modalJoin}
+    </a>
+  </section>
+</div>
+
+<style>
+  .christmas-campaign {
+    scroll-margin-top: 150px;
+    padding: clamp(2.5rem, 6vw, 5rem) 5%;
+    background: linear-gradient(135deg, #fff8f5 0%, #fff 52%, #f2faf3 100%);
+  }
+
+  .campaign-content {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: clamp(2rem, 6vw, 5rem);
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .campaign-media-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .campaign-media-frame {
+    position: relative;
+    width: min(100%, 304px);
+    max-height: 540px;
+    aspect-ratio: 9 / 16;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: #000;
+    box-shadow: 0 18px 45px rgba(35, 18, 18, 0.16);
+  }
+
+  .campaign-video,
+  .campaign-poster {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .campaign-video[hidden],
+  .campaign-poster[hidden] {
+    display: none;
+  }
+
+  .campaign-media-toggle {
+    padding: 0.45rem 0.8rem;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(26, 26, 26, 0.07);
+    color: #555;
+    font: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .campaign-media-toggle:hover {
+    background: rgba(26, 26, 26, 0.12);
+    color: #1a1a1a;
+  }
+
+  .campaign-copy {
+    max-width: 600px;
+  }
+
+  .campaign-eyebrow {
+    margin: 0 0 0.5rem;
+    color: #15803d;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .campaign-copy h2 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.12;
+  }
+
+  .campaign-dates {
+    display: inline-flex;
+    margin: 1.15rem 0 1.5rem;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid rgba(185, 28, 28, 0.13);
+    border-radius: 0.75rem;
+    background: rgba(185, 28, 28, 0.06);
+    color: #8f1d1d;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .campaign-copy h3 {
+    margin: 0 0 0.8rem;
+    font-family: var(--fuente-cuerpo);
+    font-size: 1rem;
+  }
+
+  .campaign-gifts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.65rem;
+    margin: 0 0 1.6rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .campaign-gifts li {
+    display: flex;
+    min-height: 72px;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    border: 1px solid #e8eee8;
+    border-radius: 0.8rem;
+    background: rgba(255, 255, 255, 0.8);
+    color: #3d4b3f;
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .campaign-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .campaign-gift-details {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1.15rem;
+  }
+
+  .campaign-address,
+  .campaign-solidarity {
+    margin: 0;
+    padding: 0.85rem 1rem;
+    border-radius: 0.8rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    text-align: left;
+  }
+
+  .campaign-address {
+    display: grid;
+    gap: 0.2rem;
+    border: 1px solid #e8eee8;
+    background: rgba(255, 255, 255, 0.8);
+    color: #48534a;
+  }
+
+  .campaign-solidarity {
+    border: 1px solid rgba(21, 128, 61, 0.15);
+    background: rgba(21, 128, 61, 0.06);
+    color: #3d5a45;
+  }
+
+  .campaign-solidarity p {
+    margin: 0;
+  }
+
+  .campaign-solidarity a {
+    color: #126b32;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .campaign-coupon {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 0.8rem;
+    padding: 0.65rem 0.75rem;
+    border: 1px dashed rgba(21, 128, 61, 0.45);
+    border-radius: 0.65rem;
+    background: rgba(255, 255, 255, 0.84);
+  }
+
+  .campaign-coupon code {
+    color: #14532d;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .campaign-copy-code {
+    display: inline-flex;
+    min-height: 36px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.7rem;
+    border: 1px solid rgba(21, 128, 61, 0.16);
+    border-radius: 999px;
+    background: #f0fdf4;
+    color: #166534;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .campaign-copy-code svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .campaign-copy-code:hover {
+    border-color: #16a34a;
+    background: #dcfce7;
+  }
+
+  .campaign-copy-code.is-copied {
+    border-color: #15803d;
+    background: #15803d;
+    color: #fff;
+  }
+
+  .campaign-copy-code.is-error {
+    border-color: #b91c1c;
+    background: #fef2f2;
+    color: #b91c1c;
+  }
+
+  .campaign-copy-status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+  }
+
+  .campaign-actions a,
+  .campaign-modal-join {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.15rem;
+    border-radius: 999px;
+    color: #fff;
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .campaign-actions a:hover,
+  .campaign-modal-join:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  }
+
+  .campaign-donate-money,
+  .campaign-modal-join {
+    background: #c8102e;
+  }
+
+  .campaign-donate-gift {
+    background: #15803d;
+  }
+
+  .campaign-welcome[hidden] {
+    display: none;
+  }
+
+  .campaign-welcome {
+    position: fixed;
+    z-index: 11000;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    overflow-y: auto;
+    padding: 1.25rem;
+    background: rgba(14, 17, 15, 0.82);
+    backdrop-filter: blur(5px);
+  }
+
+  .campaign-welcome-dialog {
+    position: relative;
+    display: flex;
+    width: min(620px, 100%);
+    max-height: calc(100vh - 2.5rem);
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    overflow-y: auto;
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+    background: #fff;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  }
+
+  .campaign-welcome-dialog h2 {
+    max-width: 90%;
+    margin: 0;
+    font-size: clamp(1.25rem, 4vw, 1.7rem);
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .campaign-modal-close {
+    position: absolute;
+    z-index: 1;
+    top: 0.55rem;
+    right: 0.55rem;
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    color: #222;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  .campaign-modal-poster {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    max-height: 75vh;
+    border-radius: 0.5rem;
+    object-fit: contain;
+  }
+
+  @media (max-width: 760px) {
+    .campaign-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .campaign-media-frame {
+      width: min(100%, 280px);
+    }
+
+    .campaign-copy {
+      max-width: none;
+      text-align: center;
+    }
+
+    .campaign-dates {
+      justify-content: center;
+    }
+
+    .campaign-actions {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .campaign-gifts {
+      grid-template-columns: 1fr;
+    }
+
+    .campaign-gifts li {
+      min-height: 54px;
+    }
+
+    .campaign-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .campaign-media-toggle,
+    .campaign-actions a,
+    .campaign-modal-join {
+      transition: none;
+    }
+  }
+</style>
+
