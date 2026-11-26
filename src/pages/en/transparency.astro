@@ -1,5 +1,34 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const isEn = true;
+const documentosDir = path.join(process.cwd(), 'public', 'documentos');
+
+let documentos = [];
+
+try {
+  if (fs.existsSync(documentosDir)) {
+    documentos = fs
+      .readdirSync(documentosDir, { withFileTypes: true })
+      .filter((archivo) => archivo.isFile() && archivo.name.toLowerCase().endsWith('.pdf'))
+      .map((archivo) => ({
+        filename: archivo.name,
+        title: archivo.name
+          .replace(/\.pdf$/i, '')
+          .replace(/^\d+(?:[.\-_]\s*|\s+)/, '')
+          .replace(/[_-]+/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim()
+          .toLocaleLowerCase('en')
+          .replace(/\b\p{L}/gu, (letter) => letter.toLocaleUpperCase('en')),
+      }))
+      .sort((a, b) => a.filename.localeCompare(b.filename, 'en', { numeric: true }));
+  }
+} catch {
+  documentos = [];
+}
 ---
 
 <BaseLayout title="Transparency">
@@ -20,8 +49,39 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <li><strong>Legal representative:</strong> Efrain Gallego Castro</li>
       </ul>
     </div>
-    <div style="text-align: center; margin-top: 3rem;">
-      <a href="/en/contact" style="background: var(--color-primario); color: white; padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600;">Request Certificate of Existence</a>
-    </div>
+    <section style="margin-top: 4rem;" aria-labelledby="documentos-rte">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <h2 id="documentos-rte" style="font-size: 1.8rem; margin-bottom: 0.8rem;">
+          {isEn ? 'Corporation Documents' : 'Documentos de la Corporación'}
+        </h2>
+        <p style="color: #666; font-size: 1.05rem;">
+          {isEn ? 'Consult and download our official documentation, statutes, and financial statements.' : 'Consulta y descarga nuestra documentación oficial, estatutos y estados financieros.'}
+        </p>
+      </div>
+
+      {documentos.length > 0 ? (
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+          {documentos.map((documento) => (
+            <a
+              href={`/documentos/${encodeURIComponent(documento.filename)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style="background: white; border: 1px solid #e1e1e1; color: #333; padding: 1rem 1.25rem; border-radius: 10px; text-decoration: none; display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 52px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);"
+            >
+              <span style="font-weight: 600; line-height: 1.35;">{documento.title}</span>
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+                <path d="M12 3v12"></path>
+                <path d="m7 10 5 5 5-5"></path>
+                <path d="M5 21h14"></path>
+              </svg>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p style="text-align: center; color: #999; background: #f8f9fa; border: 1px solid #eaeaea; border-radius: 10px; padding: 1.5rem;">
+          {isEn ? 'Coming soon' : 'Próximamente'}
+        </p>
+      )}
+    </section>
   </section>
 </BaseLayout>

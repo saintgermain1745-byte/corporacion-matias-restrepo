@@ -1,5 +1,34 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const isEn = false;
+const documentosDir = path.join(process.cwd(), 'public', 'documentos');
+
+let documentos = [];
+
+try {
+  if (fs.existsSync(documentosDir)) {
+    documentos = fs
+      .readdirSync(documentosDir, { withFileTypes: true })
+      .filter((archivo) => archivo.isFile() && archivo.name.toLowerCase().endsWith('.pdf'))
+      .map((archivo) => ({
+        filename: archivo.name,
+        title: archivo.name
+          .replace(/\.pdf$/i, '')
+          .replace(/^\d+(?:[.\-_]\s*|\s+)/, '')
+          .replace(/[_-]+/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim()
+          .toLocaleLowerCase('es')
+          .replace(/\b\p{L}/gu, (letter) => letter.toLocaleUpperCase('es')),
+      }))
+      .sort((a, b) => a.filename.localeCompare(b.filename, 'es', { numeric: true }));
+  }
+} catch {
+  documentos = [];
+}
 ---
 
 <BaseLayout title="Transparencia">
@@ -27,19 +56,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Botones de Descarga y Objeto Social -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
       
-            <!-- Certificado -->
-      <div style="background: white; border: 1px solid #eaeaea; padding: 2rem; border-radius: 15px; text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">📄</span>
-          <h3 style="margin-top: 0;">Certificado de Existencia</h3>
-          <p style="color: #666; font-size: 0.95rem; margin-bottom: 1.5rem;">Documento oficial expedido por la Cámara de Comercio del Oriente Antioqueño. Por seguridad de nuestros datos, se envía bajo solicitud.</p>
-        </div>
-        <!-- Enlace al formulario de contacto para solicitarlo -->
-        <a href="/contacto" style="background: var(--color-primario); color: white; padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-block; transition: background 0.3s;">
-          Solicitar Certificado
-        </a>
-      </div>
-      
       <!-- Objeto Social -->
       <div style="background: white; border: 1px solid #eaeaea; padding: 2rem; border-radius: 15px;">
         <span style="font-size: 3rem; display: block; text-align: center; margin-bottom: 1rem;">🎯</span>
@@ -62,6 +78,41 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
     </div>
+
+    <section style="margin-top: 4rem;" aria-labelledby="documentos-rte">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <h2 id="documentos-rte" style="font-size: 1.8rem; margin-bottom: 0.8rem;">
+          {isEn ? 'Corporation Documents' : 'Documentos de la Corporación'}
+        </h2>
+        <p style="color: #666; font-size: 1.05rem;">
+          {isEn ? 'Consult and download our official documentation, statutes, and financial statements.' : 'Consulta y descarga nuestra documentación oficial, estatutos y estados financieros.'}
+        </p>
+      </div>
+
+      {documentos.length > 0 ? (
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+          {documentos.map((documento) => (
+            <a
+              href={`/documentos/${encodeURIComponent(documento.filename)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style="background: white; border: 1px solid #e1e1e1; color: #333; padding: 1rem 1.25rem; border-radius: 10px; text-decoration: none; display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 52px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);"
+            >
+              <span style="font-weight: 600; line-height: 1.35;">{documento.title}</span>
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+                <path d="M12 3v12"></path>
+                <path d="m7 10 5 5 5-5"></path>
+                <path d="M5 21h14"></path>
+              </svg>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p style="text-align: center; color: #999; background: #f8f9fa; border: 1px solid #eaeaea; border-radius: 10px; padding: 1.5rem;">
+          {isEn ? 'Coming soon' : 'Próximamente'}
+        </p>
+      )}
+    </section>
 
   </section>
 </BaseLayout>

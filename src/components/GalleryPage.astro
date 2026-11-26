@@ -50,7 +50,19 @@ const photoIndexes = galleryPhotos.map((photo) => {
   return index;
 });
 
-const videos = ['2B2xj6OnPYo', 'mlahIPTVGMI', 'qF7tzb3yn44', 'YlL9OGE_hn4', 'lpn6Xr9MAfs', 'ZnzedLQhH7U'];
+const videos = [
+  { id: '2B2xj6OnPYo', title: { es: 'Video de la Corporación Matías Restrepo', en: 'Corporación Matías Restrepo video' } },
+  { id: 'mlahIPTVGMI', title: { es: 'Video de la Corporación Matías Restrepo', en: 'Corporación Matías Restrepo video' } },
+  { id: 'qF7tzb3yn44', title: { es: 'Video de la Corporación Matías Restrepo', en: 'Corporación Matías Restrepo video' } },
+  { id: 'YlL9OGE_hn4', title: { es: 'Video de la Corporación Matías Restrepo', en: 'Corporación Matías Restrepo video' } },
+  { id: 'lpn6Xr9MAfs', title: { es: 'Video de la Corporación Matías Restrepo', en: 'Corporación Matías Restrepo video' } },
+  { id: 'ZnzedLQhH7U', title: { es: 'Video de la Corporación Matías Restrepo', en: 'Corporación Matías Restrepo video' } },
+  {
+    id: 'aNGb4jvsbUk',
+    title: { es: '¡Seguimos sumando acciones que transforman vidas!', en: 'Continuing actions that transform lives!' },
+    category: { es: 'Comunidad', en: 'Community' },
+  },
+];
 ---
 
 <BaseLayout title={isEnglish ? 'Gallery' : 'Galería'}>
@@ -114,8 +126,8 @@ const videos = ['2B2xj6OnPYo', 'mlahIPTVGMI', 'qF7tzb3yn44', 'YlL9OGE_hn4', 'lpn
         {videos.map((video) => (
           <div class="video-frame">
             <iframe
-              src={`https://www.youtube.com/embed/${video}`}
-              title={isEnglish ? 'Corporación Matías Restrepo video' : 'Video de la Corporación Matías Restrepo'}
+              src={`https://www.youtube.com/embed/${video.id}`}
+              title={video.category ? `${video.title[locale]} — ${video.category[locale]}` : video.title[locale]}
               allowfullscreen
               loading="lazy"
             ></iframe>
