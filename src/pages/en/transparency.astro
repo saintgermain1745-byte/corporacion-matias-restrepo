@@ -6,7 +6,7 @@ import path from 'node:path';
 const isEn = true;
 const documentosDir = path.join(process.cwd(), 'public', 'documentos');
 
-let documentos = [];
+let documentos: any[] = [];
 
 try {
   if (fs.existsSync(documentosDir)) {
